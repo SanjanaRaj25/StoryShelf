@@ -1,6 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { createShelf } from '../../store/actions/shelfActions';
 
-class CreateProject extends Component {
+
+class CreateShelf extends Component {
     state = {
         shelf_name: '',
         description: ''
@@ -14,7 +17,8 @@ class CreateProject extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(this.state);
+        // console.log(this.state);
+        this.props.createShelf(this.state);
     }
 
   render() {
@@ -42,4 +46,10 @@ class CreateProject extends Component {
   }
 }
 
-export default CreateProject
+const mapDispatchToProps = (dispatch) => {
+    return {
+        createShelf: (shelf) => dispatch(createShelf(shelf))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateShelf)

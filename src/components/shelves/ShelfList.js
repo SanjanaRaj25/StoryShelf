@@ -1,13 +1,10 @@
 import React from 'react';
 import ShelfSummary from './ShelfSummary';
 
-const ShelfList = () => {
+const ShelfList = ({shelf}) => {
     return (
         <div className="shelf-list section">
-            <ShelfSummary />
-            <ShelfSummary />
-            <ShelfSummary />
-            <ShelfSummary />
+            <ShelfSummary shelf={shelf} key={shelf.id}/> 
         </div>
     )
 }

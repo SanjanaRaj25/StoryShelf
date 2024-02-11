@@ -8,7 +8,7 @@ const Navbar = () => {
     return (
         <nav className="nav-wrapper pink lighten-5">
             <div className="container pink lighten-5">
-                <Link to="/" className="brand-logo"><img class="circle" src={logo} alt="Freepik" id="castle-logo"/></Link>
+                <Link to="/" className="brand-logo"><img className="circle" src={logo} alt="Freepik" id="castle-logo"/></Link>
                 <SignedInLinks></SignedInLinks>
                 <SignedOutLinks></SignedOutLinks>
             </div>
