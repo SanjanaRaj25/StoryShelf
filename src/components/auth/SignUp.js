@@ -21,36 +21,41 @@ class SignUp extends Component {
 
   render() {
     return (
-     <div className="container pink lighten-5">
-        <form onSubmit={this.handleSubmit} className="white">
-            <h5>Sign Up</h5>
+    <div id="auth-background">
 
-            <div className="input-field">
-                <label htmlFor="firstName">First name:</label>
-                <input type="text" id="firstName" onChange={this.handleChange}/>
-            </div>
+    <div className="container">
+            <form onSubmit={this.handleSubmit} className="pink accent-1">
+                <h5 className="white-text center">Sign Up</h5>
 
-            <div className="input-field">
-                <label htmlFor="lastName">Last name:</label>
-                <input type="text" id="lastName" onChange={this.handleChange}/>
-            </div>
+                <div className="input-field ">
+                    <label className="white-text" htmlFor="firstName">First name:</label>
+                    <input className="white-text" type="text" id="firstName" onChange={this.handleChange}/>
+                </div>
 
-            <div className="input-field">
-                <label htmlFor="email">Email:</label>
-                <input type="email" id="email" onChange={this.handleChange}/>
-            </div>
+                <div className="input-field">
+                    <label className="white-text" htmlFor="lastName">Last name:</label>
+                    <input className="white-text" type="text" id="lastName" onChange={this.handleChange}/>
+                </div>
 
-            <div className="input-field">
-                <label htmlFor="password">Password:</label>
-                <input type="password" id="password" onChange={this.handleChange}/>
-            </div>
+                <div className="input-field">
+                    <label className="white-text" htmlFor="email">Email:</label>
+                    <input className="white-text" type="email" id="email" onChange={this.handleChange}/>
+                </div>
 
-            <div className="input-field">
-                <button className="btn pink-lighten-1 z-depth-1">Sign Up</button>
-            </div>
+                <div className="input-field">
+                    <label className="white-text" htmlFor="password">Password:</label>
+                    <input className="white-text" type="password" id="password" onChange={this.handleChange}/>
+                </div>
 
-        </form>
-     </div>
+                <div className="input-field">
+                    <button className="btn z-depth-2 transparent white-text">submit</button>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+     
     )
   }
 }

@@ -1,40 +1,24 @@
 * {
   font-family: 'Inconsolata', monospace;
   /* background-color: rgb(254, 246, 248); */
-  background-size:100%;
+  background-size: 100%;
 }
 
 html{
   min-height: 100%;
-}
 
-/* FORM STYLING */
-
-form{
-  padding: 20px;
-  margin-top: 60px;
-}
-
-form button, form h5{
-  margin: 20px 0;
-}
-
-input[type=text]:not(.browser-default):focus:not([readonly]),
-input[type=email]:not(.browser-default):focus:not([readonly]),
-input[type=password]:not(.browser-default):focus:not([readonly]),
-textarea.materialize-textarea:focus:not([readonly]){
-  border-color: #ec407a;
-  box-shadow: none;
-}
-
-input[type=text]:not(.browser-default):focus:not([readonly]) + label,
-textarea.materialize-textarea:focus:not([readonly]) + label,
-input[type=email]:not(.browser-default):focus:not([readonly]) + label,
-input[type=password]:not(.browser-default):focus:not([readonly]) + label{
-  color: #ec407a !important;
 }
 
 /* LIBRARY PAGE STYLING */
+
+#librarycards{
+  padding: 5px;
+}
+
+.shelf-list{
+  padding: 1px 1px 0px;
+}
+
 
 #card-img{
   max-height:100%;
@@ -42,15 +26,41 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 }
 .card {
   width: 100%;
+  min-height: 250px;
+  max-height: 100%;
   float: inline-start;
+}
+
+.card-title{
+  box-shadow: #ec407a;
 }
 .card-content{
   text-align: center;
   font-weight: bold;
+  height: 90%;
 }
 
 .btn-floating{
   z-index: 100;
+  font-size: 10px;
+}
+
+#add-card{
+  height: 100%;
+  width: 100%;
+  height: 250px;
+  float: inline-start;
+}
+
+#add{
+  padding-top: 40%;
+}
+
+#card-info{
+  z-index: 5;
+}
+
+#card-info p{
   font-size: 10px;
 }
 /* NAV BAR STYLING */
@@ -58,7 +68,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
 #castle-logo{
   max-height: 50px;
   max-width: 50px;
-  position: relative;
+  position: absolute;
   top: 5px;
 }
 
@@ -93,7 +103,7 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   width: 92%;
   z-index: 1;
   position: absolute;
-  top: 30%;
+  top: 25%;
 }
 
 #landing-block > div > p {
@@ -108,19 +118,67 @@ input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   text-decoration: underline;
 }
 
+/* SIGN IN/UP */
+
+/* FORM STYLING */
+
+form{
+  padding: 20px;
+  margin-top: 60px;
+  background: rgb(255,103,135);
+  background: radial-gradient(circle, rgba(255,103,135,1) 0%, rgba(234,205,221,1) 100%);
+}
+
+form label {
+  color: #fff8e1;
+}
+
+form button, form h5{
+  border-radius: 33%;
+  margin: 20px 0;
+}
+
+form button{
+  margin-left: 45%;
+  margin-right: 50%;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]){
+  border-color: #fff8e1;
+  box-shadow: none;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label{
+  color: #fff8e1 !important;
+}
 
 
-/* For devices smaller than 600px */
-@media (max-width: 600px) {
+
+
+/* For devices smaller than 950px */
+@media (max-width: 950px) {
   #castle-logo {
     left: 10px; 
   }
+  .landing-img{
+    top: 35%;
+  }
+
 }
 
-/* For devices smaller than 400px */
+/* For devices smaller than 700px
 @media (max-width: 400px) {
   #castle-logo {
     width: 80px;
     left: 5px;
   }
-}
+  .landing-img{
+    top: 40%;
+  }
+} */

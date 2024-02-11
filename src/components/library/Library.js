@@ -1,40 +1,32 @@
 import React, { Component } from 'react';
 import ShelfList from '../shelves/ShelfList';
+import ShelfButton from '../shelves/AddShelfButton';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+
 
 const Library = (props) => {
 
     const { shelves } = props;
     
     return (
+        
         <div className="library container">
 
-        <div class="row">
-            <div class="col s2 m6">
+            <h3>Hi Sanjana, welcome to your personal library! </h3>
+            <h5>Select a shelf to view it, add books, make edits, and more! You can create up to 4 additional custom shelves. </h5>
+
+        <div class="row" id="librarycards">
+            
                 {/* render each shelf card */}
             {shelves.map(shelf => {
                 return <ShelfList key={shelf.id} shelf={shelf}/>  
             })} 
-            </div>
+
+            {/* <ShelfButton></ShelfButton> */}
+  
         </div>
 
-        <Link to="/create"className="waves-effect waves-light btn pink">
-            <i className="material-icons left">book</i>
-            new shelf
-        </Link>
-
-            
-
         </div>
-        
-        // <div className="library container">
-        //     <div className="row">
-        //         <div className="col s12 m6">
-        //             <ShelfList/>
-        //         </div>
-        //     </div>
-        // </div>
     )
 }
 
