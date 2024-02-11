@@ -1,13 +1,126 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  font-family: 'Inconsolata', monospace;
+  /* background-color: rgb(254, 246, 248); */
+  background-size:100%;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html{
+  min-height: 100%;
+}
+
+/* FORM STYLING */
+
+form{
+  padding: 20px;
+  margin-top: 60px;
+}
+
+form button, form h5{
+  margin: 20px 0;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]){
+  border-color: #ec407a;
+  box-shadow: none;
+}
+
+input[type=text]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label,
+input[type=email]:not(.browser-default):focus:not([readonly]) + label,
+input[type=password]:not(.browser-default):focus:not([readonly]) + label{
+  color: #ec407a !important;
+}
+
+/* LIBRARY PAGE STYLING */
+
+#card-img{
+  max-height:100%;
+  max-width: 100%;
+}
+.card {
+  width: 100%;
+  float: inline-start;
+}
+.card-content{
+  text-align: center;
+  font-weight: bold;
+}
+
+.btn-floating{
+  z-index: 100;
+  font-size: 10px;
+}
+/* NAV BAR STYLING */
+
+#castle-logo{
+  max-height: 50px;
+  max-width: 50px;
+  position: relative;
+  top: 5px;
+}
+
+/* LANDING PAGE STYLING */
+
+.valign-wrapper{
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-direction: column;
+  background: rgb(255,103,135);
+  background: radial-gradient(circle, rgba(255,103,135,1) 0%, rgba(234,205,221,1) 100%);
+  z-index: 0;
+  padding-top: 10px;
+  padding-bottom: 30%;
+  top: 0%;
+  position: relative;
+
+}
+
+#landing-block.container{
+  padding-top: 25px;
+  width: 85%;
+  justify-content: center;
+  align-items: center;
+}
+
+.landing-img{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 92%;
+  z-index: 1;
+  position: absolute;
+  top: 30%;
+}
+
+#landing-block > div > p {
+  opacity: 0.5;
+  font-style: italic;
+  z-index: 1;
+  transform: translateY(-25px);
+  
+}
+
+#underline{
+  text-decoration: underline;
+}
+
+
+
+/* For devices smaller than 600px */
+@media (max-width: 600px) {
+  #castle-logo {
+    left: 10px; 
+  }
+}
+
+/* For devices smaller than 400px */
+@media (max-width: 400px) {
+  #castle-logo {
+    width: 80px;
+    left: 5px;
+  }
 }
