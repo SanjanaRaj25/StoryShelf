@@ -1,12 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom/client';
+import { thunk } from 'redux-thunk';
+import { Provider } from 'react-redux';
+
 import reportWebVitals from './reportWebVitals';
 import rootReducer from './store/reducers/rootReducer';
-import { Provider } from 'react-redux';
-import { thunk } from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
+
+import './index.css';
+import App from './App';
+
+const store = createStore(rootReducer, {}, compose(
+  applyMiddleware(thunk),
+  window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : (f) => f,
+));
+
 // import { reduxFirestore, getFirestore, createFirestoreInstance } from "redux-firestore";
 // import { reactReduxFirebase, getFirebase } from "react-redux-firebase";
 // import fbConfig from "./config/fbConfig";
@@ -22,10 +31,10 @@ import { createStore, applyMiddleware, compose } from 'redux';
 //   )
 // );
 
-const store = createStore(
-  rootReducer,
-  applyMiddleware(thunk)
-);
+// const store = createStore(
+//   rootReducer,
+//   applyMiddleware(thunk)
+// );
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
