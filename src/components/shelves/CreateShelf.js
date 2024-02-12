@@ -1,25 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { createShelf } from '../../store/actions/shelfActions';
-
+import { createShelf } from '../../store/reducers/shelfReducer';
 
 class CreateShelf extends Component {
-    state = {
-        shelf_name: '',
-        description: ''
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            [e.target.id]: e.target.value
-        })
-    }
-
-    handleSubmit = (e) => {
-        e.preventDefault();
-        // console.log(this.state);
-        this.props.createShelf(this.state);
-    }
 
   render() {
     return (
@@ -46,10 +29,4 @@ class CreateShelf extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        createShelf: (shelf) => dispatch(createShelf(shelf))
-    }
-}
-
-export default connect(null, mapDispatchToProps)(CreateShelf)
+export default CreateShelf;

@@ -1,41 +1,45 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ShelfList from '../shelves/ShelfList';
 import ShelfButton from '../shelves/AddShelfButton';
-import { connect } from 'react-redux';
+import {  useSelector } from 'react-redux';
+import { store } from '../../index.js';
+// import { openModal } from '../features/modal/modalSlice';
 
-var FirstName = 'Sanjana';
+
+const Library = (state) => {
+    const shelves = useSelector((state) => state.shelves.value);
+    const n = shelves.length;
+    const userName = useSelector((state) => state.user.value.FirstName);
 
 
-const Library = (props) => {
-
-    const { shelves } = props;
-    
     return (
         
-        <div className="library container">
+            <div className="library container">
+    
+                <h3>Hi <span className="pink-text">{userName}</span>, welcome to your personal library! </h3>
+                <h5>Select a shelf to view it, add books, make edits, and more! You can create up to 4 additional custom shelves. </h5>
+    
+                <div class="row" id="librarycards">
+                    {/* render each shelf card */}
+                    {shelves.map(shelf => {
+                        return <ShelfList key={shelf.id} shelf={shelf}/>  
+                    })} 
 
-            <h3>Hi <span className="pink-text">{FirstName}</span>, welcome to your personal library! </h3>
-            <h5>Select a shelf to view it, add books, make edits, and more! You can create up to 4 additional custom shelves. </h5>
+                    {/* if there are less than 6 shelves, allow them to add another
+                   */}
 
-        <div class="row" id="librarycards">
-            
-                {/* render each shelf card */}
-            {shelves.map(shelf => {
-                return <ShelfList key={shelf.id} shelf={shelf}/>  
-            })} 
+                    <>{n < 6 && <ShelfButton />}</>
 
-            {/* <ShelfButton></ShelfButton> */}
-  
-        </div>
+                </div>
+            </div>
+        )
+    } 
 
-        </div>
-    )
-}
+// const mapStateToProps = (state) => {
+//     return {
+//         shelves: state.shelves.shelves
+//     }
+// }
 
-const mapStateToProps = (state) => {
-    return {
-        shelves: state.shelves.shelves
-    }
-}
-
-export default connect(mapStateToProps)(Library);
+// export default connect(mapStateToProps)(Library);
+export default Library;

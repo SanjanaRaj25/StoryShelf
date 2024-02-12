@@ -1,20 +1,16 @@
-const initState = {
-    shelves: [
-        {id: '1', shelf_name: 'read in 2024', description: 'books read in 2024', genres: 5, books: 25},
-        {id: '2', shelf_name: 'favorites', description: 'my favorite books', genres: 2, books: 10},
-        {id: '3', shelf_name: 'want to read soon', description: 'mystery books that I like', genres: 0, books: 0},
-        {id: '4', shelf_name: 'read in 2024', description: 'books read in 2024', genres: 5, books: 25},
-        {id: '5', shelf_name: 'favorites', description: 'my favorite books', genres: 2, books: 10},
-    ]
-};
+import { createSlice } from '@reduxjs/toolkit';
 
-const shelfReducer = (state = initState, action) => {
-    // check the action type
-    switch (action.type){
-        case 'CREATE_SHELF':
-            console.log('created new shelf', action.shelf);
-    }
-    return state;
-}
+export const shelfSlice = createSlice({
+    name: "shelves",
+    initialState: { value: [] },
+    reducers: {
+        createShelf: (state, action) => {
+            console.log('created new shelf');
+            state.value = action.payload
+        },
+    },
+});
 
-export default shelfReducer
+export const { createShelf } = shelfSlice.actions;
+
+export default shelfSlice.reducer;
