@@ -2,15 +2,27 @@ import React from 'react';
 import ShelfList from '../shelves/ShelfList';
 import ShelfButton from '../shelves/AddShelfButton';
 import {  useSelector } from 'react-redux';
-import { store } from '../../index.js';
-// import { openModal } from '../features/modal/modalSlice';
+import { useEffect } from 'react';
+
+import { useDispatch } from 'react-redux';  
+import { getShelves } from '../../store/reducers/shelfReducer';
 
 
 const Library = (state) => {
-    const shelves = useSelector((state) => state.shelves.value);
-    const n = shelves.length;
-    const userName = useSelector((state) => state.user.value.FirstName);
 
+    const shelves = useSelector((state) => state.shelves.shelfArray);
+
+    // const dispatch = useDispatch();
+
+    // useEffect(() => {
+    // dispatch(getShelves());
+    // }, [dispatch]);
+
+
+    const n = shelves.length;
+    console.log(n);
+    const userName = useSelector((state) => state.user.value.firstName);
+    
 
     return (
         
@@ -35,11 +47,4 @@ const Library = (state) => {
         )
     } 
 
-// const mapStateToProps = (state) => {
-//     return {
-//         shelves: state.shelves.shelves
-//     }
-// }
-
-// export default connect(mapStateToProps)(Library);
 export default Library;

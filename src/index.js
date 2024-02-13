@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { store } from './store/store';
+import store from './store/store';
 import { Provider } from 'react-redux';
 
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';
 import App from './App';
+
 
 // firebase
 // import db from './config/firebaseConfig';
@@ -28,4 +29,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-export { store } ;

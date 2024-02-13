@@ -53,7 +53,7 @@ html{
 }
 
 #add{
-  padding-top: 40%;
+  padding-top: 30%;
 }
 
 #card-info{
@@ -63,6 +63,25 @@ html{
 #card-info p{
   font-size: 10px;
 }
+
+/* SHELF DETAIL PAGE STYLING */
+
+
+span#book-spine{
+  display: inline-block;
+  width: 1em;
+  
+  column-width: 1em;
+  column-count: 1; 
+
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+}
+
+/* .book{
+  padding-left: 100px;
+} */
+
 /* NAV BAR STYLING */
 
 #castle-logo{

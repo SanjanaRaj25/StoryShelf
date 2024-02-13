@@ -10,7 +10,7 @@ const images = [img1, img2, img3, img4, img5, img6];
 
 
 const ShelfSummary = ({shelf}) => {
-    const shelfpic = images[shelf.id - 1];
+    const shelfpic = images[shelf.id];
     return (
       <div className="col s6 m3">
         <div className="card">

@@ -1,5 +1,7 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, getDocs } from 'firebase/firestore/lite';
+import { getFirestore } from 'firebase/firestore';
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -13,15 +15,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
-
-// async function getShelves(db){
-//     const shelfCol = collection(db, 'shelves');
-//     const shelfSnapshot = await getDocs(shelfCol);
-//     const shelfList = shelfSnapshot.docs.map(doc => doc.data());
-//     return shelfList;
-    
-// }
-// console.log(getShelves(db));
 
 export { app };
 export default db;
