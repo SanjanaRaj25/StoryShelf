@@ -1,13 +1,13 @@
 import db from '../../config/firebaseConfig';
-import { collection, addDoc, getDocs } from "firebase/firestore"; 
+import { collection, addDoc, getDocs, setDoc, deleteDoc, doc } from "firebase/firestore"; 
 
 // add a new shelf document to the db
 export async function addShelf(shelf) {
-    const docRef = await addDoc(collection(db, "shelves"), {
+    const docRef = await setDoc(doc(db, "shelves", shelf.id.toString()), {
         id: shelf.id,
         shelf_name: shelf.shelf_name,
         description: shelf.description,
-        books: [ { author: 'JK Rowling', title: 'Harry Potter', genre: 'Fantasy' }],
+        bookArray: [],
         num_books: 0,
         genres: 0
         });
@@ -23,13 +23,50 @@ export async function addShelf(shelf) {
 export async function fetchShelves() {
 
     // query firestore
-    const snapshot = await getDocs(collection(db, 'Books'));
+    const snapshot = await getDocs(collection(db, 'shelves'));
     
     // map docs to array  
     const shelves = snapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
     }));
+    console.log("fetched: ", shelves.length);
   
     return shelves;
   }
+
+
+
+  // delete a shelf
+  export async function deleteShelf(id) {
+   
+    try {
+        const path = 'shelves/'.concat(id);
+        await deleteDoc(doc(db, path));
+        console.log("Deleted shelf:"+path);
+
+      }
+      catch (error) {
+        console.log("Error deleting shelf document:", error);
+      }
+
+  }
+  
+
+
+    // query fs
+    // const docRef = doc(db, "shelves", id);
+    // await deleteDoc(docRef);    
+    // // const snapshot = await getDocs(collection(db, 'shelves'));
+    // // for (var snap of snapshot.docs){
+    // //     if(snap.id === id){
+    // //         await deleteDoc(doc(db, 'shelves', snap.id));
+    // //         console.log("deleted here: ", id);
+    // //     }
+    // // }
+    // console.log("deleted: ", id);
+    // return id;
+  
+
+
+

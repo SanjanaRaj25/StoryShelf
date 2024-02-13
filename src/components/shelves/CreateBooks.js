@@ -37,7 +37,7 @@ export const CreateBooks = () => {
             </div>
 
             <div className="input-field">
-                <button type='submit' className="btn transparent z-depth-1">Submit</button>
+                <button type='submit' onSubmit={handleSubmit} className="btn transparent z-depth-1">Submit</button>
             </div>
 
         </form>

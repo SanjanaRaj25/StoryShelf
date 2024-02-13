@@ -2,14 +2,20 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'; 
 import { useNavigate } from 'react-router-dom'; 
 import { useEffect } from 'react';
-import { addShelves } from '../../store/reducers/shelfReducer';
+import { addShelves, getShelves } from '../../store/reducers/shelfReducer';
 import { useSelector } from 'react-redux';
 // import { create } from '../../store/reducers/shelfReducer';
 
 const CreateShelf = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const effect = useEffect();
+
+    // fetch shelves;
+    useEffect(()=>{
+        dispatch(getShelves());
+    },[dispatch])
+
+
     const shelf = useSelector(state => state.shelves.shelfArray);
 
     // fields
@@ -22,7 +28,7 @@ const CreateShelf = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         // if they already have 6 shelves, don't let them add another
-        if (shelf && shelf.length > 6){
+        if (shelf && shelf.length > 5){
             console.log('you have maxed out your library!');
         }
         else {
@@ -32,7 +38,7 @@ const CreateShelf = () => {
                 description: description,
                 num_books: 0,
                 genres: 0,
-                books: [  ],
+                bookArray: []
             }
             dispatch(addShelves(newShelf));
         }

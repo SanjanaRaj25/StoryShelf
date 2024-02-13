@@ -6,7 +6,7 @@ import img3 from '../../imgs/shelf3.jpg';
 import img4 from '../../imgs/shelf4.jpg';
 import img5 from '../../imgs/shelf8.jpg';
 import img6 from '../../imgs/shelf6.jpg';
-const images = [img1, img2, img3, img4, img5, img6];
+const images = [img1, img2, img3, img4, img5, img6, img1, img2, img3, img4, img5, img6, img1, img2, img3, img4, img5, img6];
 
 
 const ShelfSummary = ({shelf}) => {

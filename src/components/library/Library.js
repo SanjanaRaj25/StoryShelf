@@ -1,8 +1,11 @@
 import React from 'react';
 import ShelfList from '../shelves/ShelfList';
 import ShelfButton from '../shelves/AddShelfButton';
+
+// import selectors
 import {  useSelector } from 'react-redux';
 import { useEffect } from 'react';
+import { selectShelfList } from '../../store/selectors';
 
 import { useDispatch } from 'react-redux';  
 import { getShelves } from '../../store/reducers/shelfReducer';
@@ -10,17 +13,15 @@ import { getShelves } from '../../store/reducers/shelfReducer';
 
 const Library = (state) => {
 
-    const shelves = useSelector((state) => state.shelves.shelfArray);
+    const shelves = useSelector(selectShelfList);
 
-    // const dispatch = useDispatch();
-
-    // useEffect(() => {
-    // dispatch(getShelves());
-    // }, [dispatch]);
-
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getShelves());
+        }, [dispatch]);
 
     const n = shelves.length;
-    console.log(n);
+
     const userName = useSelector((state) => state.user.value.firstName);
     
 

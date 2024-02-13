@@ -4,15 +4,19 @@ import { useSelector } from 'react-redux';
 import { CreateBooks } from './CreateBooks';
 import { Books } from './Book';
 import { Link } from 'react-router-dom';
+import { selectShelves } from '../../store/selectors';
+import { selectShelfList } from '../../store/selectors';
+// import { selectShelfById } from '../../store/selectors';
 
 
-const ShelfDetails = ({match}) => {
+const ShelfDetails = () => {
     
-    const { pID } = useParams();
+    const { id } = useParams();
 
-    const shelf = useSelector(state => state.shelves.shelfArray[0]);
-    console.log(shelf);
-    const books = shelf.books;
+    const shelves = useSelector(selectShelfList);
+
+    const shelf = shelves[id];
+    let books = shelf.bookArray;
 
     return (
         <div className="container section shelf-details">
@@ -29,19 +33,21 @@ const ShelfDetails = ({match}) => {
                         <Link to="/createBook"className="btn-floating btn-small pink lighten-4">
                             <i className="material-icons">book</i>
                         </Link>
+
+                        <a href={`/deleteShelf/${id}`} class="btn-floating halfway-fab waves-effect waves-light pink accent-1"><i class="material-icons">delete</i> </a>
                         
+                        <Link to="/editShelf"className="btn-floating btn-small green lighten-4">
+                            <i className="material-icons">edit</i>
+                        </Link>
                     </div>
                     <div className="container" id="shelfDisplay">
-                    {shelf.books.length > 0?(
+                    {books.length > 0?(
                         <div class="row" id="bookcards">
                             <Books books={books}/>
                         </div>
                         ):(<div className='message-box'>No books yet</div>)}
                     </div>
-
-
                 </div>
-                
             </div>
         </div>
 
