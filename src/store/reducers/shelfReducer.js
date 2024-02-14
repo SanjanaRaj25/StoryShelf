@@ -1,12 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import db from '../../config/firebaseConfig';
-import { addDoc, setDoc, collection, deleteDoc, doc, getDocs, updateDoc } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-// import async service functions
-import { fetchShelves, addShelf, deleteShelf } from '../services/addShelf';
 
-// get the collection
-const shelfDB = collection(db, "shelves");
+// import logic for async service functions
+import { fetchShelves, addShelf, deleteShelf, addBook } from '../services/addShelf';
+
 
 export const getShelves = createAsyncThunk(
   'shelves/getAll', 
@@ -32,6 +31,14 @@ export const delShelf = createAsyncThunk(
   }
 )
 
+export const addBooks = createAsyncThunk(
+  'shelves/addbook', 
+  async (book) => {
+    const addedBook = await addBook(book);
+    return addedBook;
+  }
+)
+
 
 export const shelfSlice = createSlice({
   name: "shelves",
@@ -43,11 +50,17 @@ export const shelfSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(addShelves.fulfilled, (state,action) => {
-        state.shelfArray.push(action.payload);
+
+        builder.addCase(getShelves.fulfilled, (state, action) => {
+          state.shelfArray = action.payload.map(shelf => ({
+            ...shelf,
+            books: shelf.books.map(book => ({...book})) 
+          }));
+        });
+
       })
-      .addCase(getShelves.pending, (state) => {
-        // state.shelves.status = 'loading'
-    })
+
+
       .addCase(getShelves.fulfilled, (state, action) => {
         // state.shelves.status = 'succeeded'
         state.shelfArray = action.payload
@@ -55,8 +68,12 @@ export const shelfSlice = createSlice({
       .addCase(delShelf.fulfilled, (state, action)=>{
         state.shelfArray = state.shelfArray.filter((shelf)=>shelf.id !== action.payload);
       })
+      .addCase(addBooks.fulfilled, (state, action) => {
+        console.log(action.payload);
+        // const shelf = state.shelfArray.find(s => s.id === action.payload.i);
+        // shelf.bookArray.push(action.payload.book);
+      })
   }
-  
 });
 
 

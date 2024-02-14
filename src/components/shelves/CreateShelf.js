@@ -4,17 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 import { addShelves, getShelves } from '../../store/reducers/shelfReducer';
 import { useSelector } from 'react-redux';
-// import { create } from '../../store/reducers/shelfReducer';
 
 const CreateShelf = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
-    // fetch shelves;
-    useEffect(()=>{
-        dispatch(getShelves());
-    },[dispatch])
-
 
     const shelf = useSelector(state => state.shelves.shelfArray);
 
@@ -45,7 +38,7 @@ const CreateShelf = () => {
 
         setShelfName('');
         setDescription('');
-        // navigate("/shelves");
+        navigate("/library");
     }
 
     // form

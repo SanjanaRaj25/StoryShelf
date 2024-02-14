@@ -53,7 +53,12 @@ html{
 }
 
 #add{
-  padding-top: 30%;
+  padding-top: 40%;
+}
+
+#enter{
+  left: 40%;
+  top: 30%;
 }
 
 #card-info{

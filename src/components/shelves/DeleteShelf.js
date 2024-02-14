@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux'; 
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'; 
-import { delShelf } from '../../store/reducers/shelfReducer';
+import { delShelf, getShelves } from '../../store/reducers/shelfReducer';
 import { useSelector } from 'react-redux';
 
 
 const DeleteShelf = () => {
     const { id } = useParams();
     const shelves = useSelector(state => state.shelves.shelfArray);
-    const shelf = shelves[id];
     const dispatch = useDispatch();
-    const nav = useNavigate();
+    const navigate = useNavigate();
     
     // const effect = useEffect();
+    const shelf = shelves.find(shelf => shelf.id === parseInt(id));
 
     // onSubmit
     const handleSubmit = (e) => {
         e.preventDefault();
         // delete the shelf
-
-        // TODO: MAKE THIS DYNAMIC
-        const i =  (shelves[0].id).toString();
+        
+        const i =  (shelf.id).toString();
         dispatch(delShelf(i));
         // go back to the library
+        navigate('/Library');
+        
 
     }
 

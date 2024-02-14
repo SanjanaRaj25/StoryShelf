@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 const ShelfButton = () => {
     return (
-        <div className="col s12 m4">
-            <div className="card small pink accent-1" id="add-card">
+        <div className="col s6 m3">
+            <div className="card small z-depth-0" id="add-card">
 
-            <div className="card-content center"  id="add"> 
+            <div className="card-content"  id="add"> 
                 {/* <h5> add a new shelf!</h5> */}
 
-                <Link to="/create"className="btn-floating btn-large pink lighten-4 pulse">
+                <Link to="/create"className="btn btn-large pink lighten-4 pulse z-depth-4">
                     <i className="material-icons">add</i>
                 </Link>
 
