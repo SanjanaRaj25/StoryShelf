@@ -21,7 +21,7 @@ const CreateShelf = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         // if they already have 6 shelves, don't let them add another
-        if (shelf && shelf.length > 5){
+        if (shelf && shelf.length > 7){
             console.log('you have maxed out your library!');
         }
         else {

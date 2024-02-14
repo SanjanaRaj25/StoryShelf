@@ -30,7 +30,7 @@ const Library = (state) => {
             <div className="library container">
     
                 <h3>Hi <span className="pink-text">{userName}</span>, welcome to your personal library! </h3>
-                <h5>Select a shelf to view it, add books, make edits, and more! You can create up to 4 additional custom shelves. </h5>
+                <h5>You can create up to 8 custom shelves by clicking the <span className="pink-text">add</span> button. Select a shelf to view it, add books, make edits, and more!  </h5>
     
                 <div class="row" id="librarycards">
                     {/* render each shelf card */}
