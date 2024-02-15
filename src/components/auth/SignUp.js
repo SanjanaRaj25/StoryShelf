@@ -2,6 +2,8 @@ import React, { Component, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
 import {  createUserWithEmailAndPassword  } from 'firebase/auth';
 import { auth } from '../../config/firebaseConfig';
+import { db } from '../../config/firebaseConfig';
+import { collection, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
 
 
 
@@ -15,24 +17,19 @@ const SignUp = () => {
  
     const onSubmit = async (e) => {
       e.preventDefault()
-     
       await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-            navigate("/signin");
-            // ...
+            const uid = userCredential.user.uid;
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            console.log(errorCode, errorMessage);
-            // ..
+        .then((uid) => {
+            let newUser = {
+                firstName: firstName,
+                lastName: lastName, 
+                id: uid
+            }
         });
- 
-   
     }
+
  
   return (
     <div id="auth-background">
