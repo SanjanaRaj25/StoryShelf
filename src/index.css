@@ -12,6 +12,19 @@ html{
 /* LIBRARY PAGE STYLING */
 
 
+form.center{
+  background: rgb(255, 245, 248);
+}
+
+span.lever::after{
+  background: #dcedc8;
+}
+
+span.lever::before{
+  background: #fce4ec;
+}
+
+
 #librarycards{
   padding: 5px;
 }
@@ -73,7 +86,7 @@ html{
 
 #book-cat{
   position: absolute;
-  transform: translateY(-270px);
+  transform: translateY(-200px);
   right: 10%;
   width: 30%;
   margin: 0;

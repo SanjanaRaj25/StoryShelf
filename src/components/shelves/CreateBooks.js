@@ -26,7 +26,6 @@ export const CreateBooks = () => {
         e.preventDefault();
 
         const i =  (shelf.id).toString();
-        console.log(i);
         let book={
             title, author, genre, i
         }

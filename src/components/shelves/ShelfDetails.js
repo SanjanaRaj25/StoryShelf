@@ -78,7 +78,7 @@ const ShelfDetails = () => {
                             </div>
                         </div>
                         
-                        ):(<div className='message-box center'><h5>Click the button to add your first book!</h5></div>)}
+                        ):owned&&(<div className='message-box center'><h5>Click the button to add your first book!</h5></div>)}
                     </div>
                 </div>
             </div>

@@ -79,8 +79,6 @@ export async function fetchShelves() {
     
     // add book object to array AND update numBooks/genres
     try {
-        // figure out how to get id correctly 
-        console.log(book.i);
         const shelfRef = doc(db, 'shelves/'.concat(book.i));
         // const shelfRef = doc(db, 'shelves', '1');
        await updateDoc(shelfRef, {

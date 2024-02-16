@@ -30,6 +30,7 @@ function App() {
           <Route path='/create' element={<CreateShelf/>}/>
           <Route path='/createBook/:id' element={<CreateBooks/>}/>
           <Route path='/deleteShelf/:id' element={<DeleteShelf/>}/>
+          <Route path='/notes/:id' element={<DeleteShelf/>}/>
         </Routes>
       </div>
     </BrowserRouter>
