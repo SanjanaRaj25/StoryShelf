@@ -1,27 +1,46 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Books } from './Book';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { selectShelfList } from '../../store/selectors';
-import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { auth } from '../../config/firebaseConfig';
 import { getShelves } from '../../store/reducers/shelfReducer';
-import Library from '../library/Library';
+
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 // import { selectShelfById } from '../../store/selectors';
+import cat from '../../imgs/sleepingcat.png';
 
 
 const ShelfDetails = () => {
+
+   
     
     const { id } = useParams();
-
+    const dispatch = useDispatch();
     const shelves = useSelector(selectShelfList);
 
-    const shelf = shelves.find(shelf => shelf.id === parseInt(id));
+    const shelf = shelves.find(shelf => shelf.id === id);
+
+    const uid = useSelector(state => state.user.uid); 
+    console.log(uid);
+
+    useEffect(() => {
+        dispatch(getShelves());
+        }, [dispatch]);
+
 
     if(!shelf) {
         return <div>Loading...</div>; 
       }
+
+    if(!uid) {
+        return <Navigate to='/signin'></Navigate>
+    }
+
+    const owned = (uid === shelf.uid);
+    console.log(owned);
+
 
     let books = shelf.bookArray;
 
@@ -31,26 +50,35 @@ const ShelfDetails = () => {
                 <div className="card-content pink lighten-5">
                     <span className="card-title"> {shelf.shelf_name} </span>
                     <p>{shelf.description}</p>
-                    <p>This shelf contains {books.length} books that range across {shelf.genreList.length} different genres</p>
+                    <p>This shelf belongs to <span className='chip'>{ shelf.owner }.</span> It contains {books.length} books that range across {shelf.genreList.length} different genres</p>
                 </div>
-                <div>    
+            <div>    
 
-                    <div className="deep-purple lighten-5 center" id="addBooks">
+            {/* <>{n < 40 && <ShelfButton />}</> */}
 
-                        <a href={`/createBook/${shelf.id}`} class="btn-floating waves-effect waves-light pink lighten-4"><i class="material-icons">book</i> </a>
+           
+            <> {<div className="center" id="addBooks">
+                { owned &&
+                    <Link to={`/createBook/${shelf.id}`} className="btn-floating btn-large pink z-depth-1">
+                        <i className="large material-icons white-text">add_box</i>
+                    </Link>
+                }
+                
+            </div>}</>
+            
+            
 
-                        {/* <a href={`/deleteShelf/${id}`} class="btn-floating halfway-fab waves-effect waves-light pink accent-1"><i class="material-icons">delete</i> </a> */}
-                        
-                        <Link to="/editShelf"className="btn-floating btn-small green lighten-4">
-                            <i className="material-icons">edit</i>
-                        </Link>
-                    </div>
                     <div className="container" id="shelfDisplay">
+                    <img src={cat} alt="hi" id="book-cat"/> 
+                        
                     {books.length > 0?(
-                        <div class="row" id="bookcards">
-                            <Books books={books}/>
+                        <div className="shelf z-depth-5">
+                            <div class="row" id="bookcards">
+                                <Books books={books}/>
+                            </div>
                         </div>
-                        ):(<div className='message-box'>No books yet</div>)}
+                        
+                        ):(<div className='message-box center'><h5>Click the button to add your first book!</h5></div>)}
                     </div>
                 </div>
             </div>

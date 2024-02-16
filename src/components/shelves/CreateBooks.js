@@ -4,16 +4,18 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import M, { options } from 'materialize-css';
-import { addBooks } from '../../store/reducers/shelfReducer';
+import { addBooks, getShelves } from '../../store/reducers/shelfReducer';
+
 
 export const CreateBooks = () => {
 
     const { id } = useParams();
     const shelves = useSelector(state => state.shelves.shelfArray);
-    const shelf = shelves.find(shelf => shelf.id === parseInt(id));
+    const shelf = shelves.find(shelf => shelf.id === id);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
+
 
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -29,7 +31,6 @@ export const CreateBooks = () => {
             title, author, genre, i
         }
 
-        
         dispatch(addBooks(book));
 
         // clear form fields
@@ -37,7 +38,7 @@ export const CreateBooks = () => {
         setAuthor('');
         setGenre('');
         // go back to shelf
-        navigate(`/Library`); // go back 1 page
+        navigate(-1); // go back 1 page 
     }
 
     return(
@@ -80,7 +81,7 @@ export const CreateBooks = () => {
             </div> */}
 
             <div className="input-field">
-                <button type='submit' className="btn transparent z-depth-1">Submit</button>
+                <button type='Submit' className="btn transparent z-depth-1">Submit</button>
             </div>
 
         </form>

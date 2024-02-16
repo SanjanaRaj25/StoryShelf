@@ -5,9 +5,17 @@ import { useEffect } from 'react';
 import { addShelves, getShelves } from '../../store/reducers/shelfReducer';
 import { useSelector } from 'react-redux';
 
+import { auth } from '../../config/firebaseConfig';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+
 const CreateShelf = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const auth = getAuth();
+
+    const uid = useSelector(state => state.user.uid); 
+    const owner = useSelector(state => state.user.displayName); 
 
     const shelf = useSelector(state => state.shelves.shelfArray);
 
@@ -15,14 +23,15 @@ const CreateShelf = () => {
     const [shelf_name, setShelfName] = useState('');
     const [description, setDescription] = useState('');
 
-    // handleChange
+
+    // every shelf is tagged with the id of the user that created it
 
     // onSubmit
     const onSubmit = (e) => {
         e.preventDefault();
         // if they already have 6 shelves, don't let them add another
-        if (shelf && shelf.length > 7){
-            console.log('you have maxed out your library!');
+        if (shelf && shelf.length > 40){
+            console.log('the library is too big! let us clean out some shelves');
         }
         else {
             let newShelf = {
@@ -31,14 +40,16 @@ const CreateShelf = () => {
                 description: description,
                 num_books: 0,
                 genres: 0,
-                bookArray: []
+                bookArray: [],
+                uid : uid,
+                owner: owner
             }
             dispatch(addShelves(newShelf));
         }
 
         setShelfName('');
         setDescription('');
-        navigate("/library");
+        navigate("/Library");
     }
 
     // form

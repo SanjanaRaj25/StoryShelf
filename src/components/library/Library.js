@@ -6,46 +6,72 @@ import ShelfButton from '../shelves/AddShelfButton';
 import {  useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { selectShelfList } from '../../store/selectors';
+import { Navigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';  
 import { getShelves } from '../../store/reducers/shelfReducer';
-
+import { auth } from '../../config/firebaseConfig';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Library = (state) => {
 
-    const shelves = useSelector(selectShelfList);
-
+    const auth = getAuth();
     const dispatch = useDispatch();
+
+    const uid = useSelector(state => state.user.uid); 
+    const displayName = useSelector(state => state.user.displayName); 
+
+    useEffect(()=>{
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                return <Navigate to='/signin'></Navigate>
+            }
+            }); 
+    })
+
     useEffect(() => {
         dispatch(getShelves());
         }, [dispatch]);
 
-    const n = shelves.length;
+    const shelves = useSelector(selectShelfList);
+    let n = 0;
+    if (shelves){
+        n = shelves.length;
+    }
 
-    const userName = useSelector((state) => state.user.value.firstName);
+
+
+    // if they aren't logged in
+    if (!uid){
+        return <Navigate to='/signin'></Navigate>
+    }
+    else {
     
-
-    return (
+        
+        return (
+            
         
             <div className="library container">
     
-                <h3>Hi <span className="pink-text">{userName}</span>, welcome to your personal library! </h3>
-                <h5>You can create up to 8 custom shelves by clicking the <span className="pink-text">add</span> button. Select a shelf to view it, add books, make edits, and more!  </h5>
+                <h3>Hi <span className="pink-text">{displayName.split(" ")[0]}</span>, welcome to the library! </h3>
+                <h5>You can create custom shelves by clicking the <span className="pink-text">add</span> button. You can view any shelf, but you'll only be able to edit or delete the ones that belong to you!</h5>
     
                 <div class="row" id="librarycards">
                     {/* render each shelf card */}
                     {shelves.map(shelf => {
-                        return <ShelfList key={shelf.id} shelf={shelf}/>  
+                        return <ShelfList key={shelf.id} shelf={shelf} uid={uid}/>  
                     })} 
 
-                    {/* if there are less than 6 shelves, allow them to add another
+                    {/* if there are less than 40 shelves, allow them to add another
                    */}
 
-                    <>{n < 6 && <ShelfButton />}</>
+                    <>{n < 40 && <ShelfButton />}</>
 
                 </div>
             </div>
         )
+
+    }
     } 
 
 export default Library;

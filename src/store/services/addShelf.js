@@ -1,22 +1,25 @@
 import db from '../../config/firebaseConfig';
-import { collection, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
+import { collection, getDoc, addDoc, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
 
 // add a new shelf document to the db
 export async function addShelf(shelf) {
-    const docRef = await setDoc(doc(db, "shelves", shelf.id.toString()), {
-        id: shelf.id,
-        shelf_name: shelf.shelf_name,
-        description: shelf.description,
-        bookArray: [] ,
-        num_books: 0,
-        genreList: []
-        });
-    console.log("Document written with ID: ", docRef.id);
+  const collRef = collection(db, "shelves");
+  const s = await addDoc(collRef, {
+      shelf_name: shelf.shelf_name,
+      description: shelf.description,
+      bookArray: [],
+      num_books: 0,
+      genreList: [], 
+      uid: shelf.uid,  
+      owner: shelf.owner 
+  });
     return {
-        id: docRef.id,
+        id: s.id,
         ...shelf
     };
 }
+
+
 
 // get a list of all the shelf documents in the db to update the state
 export async function fetchShelves() {
@@ -45,6 +48,30 @@ export async function fetchShelves() {
         console.log("Error deleting shelf document:", error);
       }
   }
+
+    // // add a book to the shelf
+    // export async function addBook(book){
+    //   const shelfRef = doc(db, "shelves", book.shelfId);
+
+    // // Get the document snapshot
+    // const docSnap = await getDoc(shelfRef);
+
+    // // Get existing book array  
+    // const existingBooks = docSnap.data().bookArray;  
+
+    // // Push new book
+    // existingBooks.push({
+    //   title: book.title,
+    //   author: book.author,
+    //   genre: book.genre
+    // });
+
+    // // Write book array back
+    // await updateDoc(shelfRef, {
+    //   bookArray: existingBooks 
+    // });
+    // }
+
 
   // add a book to the shelf
   export async function addBook(book){

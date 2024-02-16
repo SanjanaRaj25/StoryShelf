@@ -11,6 +11,7 @@ html{
 
 /* LIBRARY PAGE STYLING */
 
+
 #librarycards{
   padding: 5px;
 }
@@ -18,7 +19,6 @@ html{
 .shelf-list{
   padding: 1px 1px 0px;
 }
-
 
 #card-img{
   max-height:100%;
@@ -57,8 +57,8 @@ html{
 }
 
 #enter{
-  left: 40%;
-  top: 30%;
+  left: 45%;
+  top: 10%;
 }
 
 #card-info{
@@ -71,21 +71,146 @@ html{
 
 /* SHELF DETAIL PAGE STYLING */
 
-
-span#book-spine{
-  display: inline-block;
-  width: 1em;
-  
-  column-width: 1em;
-  column-count: 1; 
-
-  writing-mode: vertical-rl;
-  text-orientation: sideways;
+#book-cat{
+  position: absolute;
+  transform: translateY(-270px);
+  right: 10%;
+  width: 30%;
+  margin: 0;
+  padding: 0;
 }
 
-/* .book{
-  padding-left: 100px;
-} */
+#addBooks{
+  padding-top: 3%;
+  padding-bottom: 10%;
+}
+
+span#book-spine{
+  width: 1em;
+  writing-mode: vertical-rl;
+  text-orientation: sideways;
+  color:#263238;
+}
+
+#librarycards{
+  margin-top: 10px;
+}
+
+#bookcards.row{
+  padding-right: 1%;
+  padding-left: 1%;
+  padding-bottom: 0;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  border-top: 8px solid #80461B;
+  height: 10%;
+  background-image: url(https://images.rawpixel.com/image_350/czNmcy1wcml2YXRlL3Jhd3BpeGVsX2ltYWdlcy93ZWJzaXRlX2NvbnRlbnQvbHIvcGYtczEyNS1ha2U3MDA1LWIuanBn.jpg);
+}
+
+
+.shelf{
+  border-right: 12px solid #80461B;
+  border-left: 12px solid #80461B;
+  border-bottom: 8px solid #80461B;
+  background-color: #80461B;
+}
+
+#book.col.s1.m1{
+  margin: 0;
+  margin-top: 10px;
+  width: 8.33%;
+  max-width: 8.33%;
+}
+
+#book{
+  margin-top: 15px;
+  border-top-right-radius: 15%;
+  border-top-left-radius: 15%;
+  box-shadow: #303f9f;
+  border-bottom: 4px solid #80461B; 
+  background-color: #fce4ec;
+  border-top: 1px solid #fce4ec;
+  border-left: 1px solid #fce4ec;
+}
+
+#book:nth-child(2n){
+  background-color: #f48fb1;
+}
+
+#book:nth-child(3n){
+  background-color: #e1bee7;
+}
+
+#book:nth-child(4n){
+  background-color: #d1c4e9;
+}
+
+#book:nth-child(5n){
+  background-color: #a999c8;
+}
+
+#book:nth-child(6n){
+  background-color: #9fa8da;
+}
+
+#book:nth-child(7n){
+  background-color: #9dabff;
+}
+
+#book:nth-child(8n){
+  background-color: #c1e3ff; 
+}
+
+#book:nth-child(9n){
+  background-color: #90caf9; 
+}
+
+#book:nth-child(10n){
+  background-color: #b2dfdb; 
+}
+
+#book:nth-child(11n){
+  background-color: #8cc5c1; 
+}
+
+#book:nth-child(12n){
+  background-color: #c8e6c9; 
+}
+
+#book:nth-child(13n){
+  background-color: #cbffee; 
+}
+
+#book:nth-child(14n){
+  background-color: #aed581; 
+}
+
+#book:nth-child(15n){
+  background-color: #fba9d7; 
+}
+
+#book:nth-child(16n){
+  background-color: #fff176; 
+}
+
+#book:nth-child(17n){
+  background-color: #edb0b0; 
+}
+
+#book:nth-child(18n){
+  background-color: #ffd54f; 
+}
+
+#book:nth-child(21n){
+  background-color: #eeeeee; 
+}
+
+
+
+
+
+
 
 /* NAV BAR STYLING */
 
@@ -129,7 +254,6 @@ span#book-spine{
   position: absolute;
   top: 25%;
 }
-
 #landing-block > div > p {
   opacity: 0.5;
   font-style: italic;
@@ -181,28 +305,3 @@ input[type=email]:not(.browser-default):focus:not([readonly]) + label,
 input[type=password]:not(.browser-default):focus:not([readonly]) + label{
   color: #fff8e1 !important;
 }
-
-
-
-
-/* For devices smaller than 950px */
-@media (max-width: 950px) {
-  #castle-logo {
-    left: 10px; 
-  }
-  .landing-img{
-    top: 35%;
-  }
-
-}
-
-/* For devices smaller than 700px
-@media (max-width: 400px) {
-  #castle-logo {
-    width: 80px;
-    left: 5px;
-  }
-  .landing-img{
-    top: 40%;
-  }
-} */

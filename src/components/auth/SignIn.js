@@ -1,11 +1,14 @@
 import React, { Component, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { auth } from '../../config/firebaseConfig';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/reducers/user';
 
 
 
 const SignIn = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('');
@@ -20,6 +23,7 @@ const SignIn = () => {
             const user = userCredential.user;
             navigate("/Library");
             console.log(user);
+            dispatch(login(user));
             // ...
         })
         .catch((error) => {
@@ -28,6 +32,7 @@ const SignIn = () => {
             console.log(errorCode, errorMessage);
             // ..
         });
+
     console.log('here');
  
     }
@@ -41,12 +46,12 @@ const SignIn = () => {
 
                 <div className="input-field ">
                     <label className="white-text" for="email">Email:</label>
-                    <input className="white-text validate" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                    <input className="white-text validate" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="johndoe123@gmail.com"/>
                 </div>
 
                 <div className="input-field ">
                     <label className="white-text" for="password">Password:</label>
-                    <input className="white-text validate" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required/>
+                    <input className="white-text validate" type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required autoComplete="current-password"/>
                 </div>
 
 

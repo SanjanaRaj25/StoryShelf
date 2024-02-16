@@ -48,31 +48,71 @@ export const shelfSlice = createSlice({
   },
   // reducers: {},
   extraReducers: builder => {
-    builder
-      .addCase(addShelves.fulfilled, (state,action) => {
 
-        builder.addCase(getShelves.fulfilled, (state, action) => {
-          state.shelfArray = action.payload.map(shelf => ({
-            ...shelf,
-            books: shelf.books.map(book => ({...book})) 
-          }));
-        });
+     // Add Shelves
+  builder.addCase(addShelves.fulfilled, (state, action) => {
+    return state;
+    // state.shelfArray.push(action.payload); 
+  });
 
-      })
+  // Get Shelves
+  builder.addCase(getShelves.fulfilled, (state, action) => {
+    state.shelfArray = action.payload;
+  });
+
+  // Delete Shelf
+  builder.addCase(delShelf.fulfilled, (state, action) => {
+    if (action.payload) {
+      state.shelfArray = state.shelfArray.filter(
+        (shelf) => shelf.id !== action.payload.id
+      );
+    } 
+
+  });
+
+  builder.addCase(addBooks.fulfilled, (state, action) => {
+    return state;
+    // state.shelfArray.push(action.payload); 
+  });
+
+  // Add Books
+  // builder.addCase(addBooks.fulfilled, (state, action) => {
+
+  //   const shelf = state.shelfArray.find(
+  //     (s) => s.id === action.payload.shelfId
+  //   );
+
+  //   if (shelf.books) {
+  //     shelf.books.push(action.payload.book) 
+  //   }
+  // });
 
 
-      .addCase(getShelves.fulfilled, (state, action) => {
-        // state.shelves.status = 'succeeded'
-        state.shelfArray = action.payload
-      })
-      .addCase(delShelf.fulfilled, (state, action)=>{
-        state.shelfArray = state.shelfArray.filter((shelf)=>shelf.id !== action.payload);
-      })
-      .addCase(addBooks.fulfilled, (state, action) => {
-        console.log(action.payload);
-        // const shelf = state.shelfArray.find(s => s.id === action.payload.i);
-        // shelf.bookArray.push(action.payload.book);
-      })
+
+
+      // .addCase(addShelves.fulfilled, (state,action) => {
+      //   builder.addCase(getShelves.fulfilled, (state, action) => {
+      //     state.shelfArray = action.payload.map(shelf => ({
+      //       ...shelf,
+      //       books: shelf.books.map(book => ({...book})) 
+      //     }));
+      //   });
+
+      // })
+
+
+      // .addCase(getShelves.fulfilled, (state, action) => {
+      //   // state.shelves.status = 'succeeded'
+      //   state.shelfArray = action.payload
+      // })
+      // .addCase(delShelf.fulfilled, (state, action)=>{
+      //   state.shelfArray = state.shelfArray.filter((shelf)=>shelf.id !== action.payload);
+      // })
+      // .addCase(addBooks.fulfilled, (state, action) => {
+      //   console.log(action.payload);
+      //   // const shelf = state.shelfArray.find(s => s.id === action.payload.i);
+      //   // shelf.bookArray.push(action.payload.book);
+      // })
   }
 });
 

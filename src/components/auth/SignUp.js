@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword  } from 'firebase/auth';
+import {  createUserWithEmailAndPassword, updateProfile, getAdditionalUserInfo  } from 'firebase/auth';
 import { auth } from '../../config/firebaseConfig';
 import { db } from '../../config/firebaseConfig';
 import { collection, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
@@ -16,18 +16,19 @@ const SignUp = () => {
     const [password, setPassword] = useState('');
  
     const onSubmit = async (e) => {
+
+    const name = `${firstName} ${lastName}`;
+    console.log(name);
       e.preventDefault()
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            const uid = userCredential.user.uid;
-        })
-        .then((uid) => {
-            let newUser = {
-                firstName: firstName,
-                lastName: lastName, 
-                id: uid
-            }
-        });
+      try {
+        await createUserWithEmailAndPassword(auth, email, password).catch((err)=>console.log(err));
+        await updateProfile(auth.currentUser, { displayName: name}).catch((err)=>console.log(err));
+        navigate("/signin");
+      }
+      catch (err) {
+        console.log(err);
+      }
+     
     }
 
  
@@ -40,17 +41,17 @@ const SignUp = () => {
 
                 <div className="input-field ">
                     <label className="white-text" for="firstName">First name:</label>
-                    <input className="white-text" type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required/>
+                    <input className="white-text" type="text" id="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} required autoComplete="John"/>
                 </div>
 
                 <div className="input-field ">
                     <label className="white-text" for="lastName">Last name:</label>
-                    <input className="white-text" type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required/>
+                    <input className="white-text" type="text" id="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} required autoComplete="Doe"/>
                 </div>
 
                 <div className="input-field ">
                     <label className="white-text" for="email">Email:</label>
-                    <input className="white-text validate" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required/>
+                    <input className="white-text validate" type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} required autoComplete="johndoe123@gmail.com"/>
                 </div>
 
                 <div className="input-field ">
