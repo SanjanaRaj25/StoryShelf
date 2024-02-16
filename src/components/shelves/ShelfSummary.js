@@ -9,15 +9,18 @@ import img4 from '../../imgs/shelf4.jpg';
 import img5 from '../../imgs/shelf8.jpg';
 import img6 from '../../imgs/shelf6.jpg';
 import { auth } from '../../config/firebaseConfig';
-const images = [img1, img2, img3, img4, img5, img6, img1, img2, img3, img4, img5, img6];
+const images = [img1, img2, img3, img4, img5, img6];
 
 
 const ShelfSummary = ({shelf}) => {
 
     let filter = false;
+
     const uid = useSelector(state => state.user.uid); 
-    let n = Math.floor(Math.random()*10);
+
+    let n = (shelf.num_pics % 6);
     const shelfpic = images[n];
+  
 
     let g = 0;
     if (shelf.genreList){
@@ -26,7 +29,8 @@ const ShelfSummary = ({shelf}) => {
     
 
     return (
-      <div className="col s6 m3">
+      
+      <div className="col s6 m4">
 
         <div className="card">
             
@@ -69,8 +73,8 @@ const ShelfSummary = ({shelf}) => {
               
             </div>
           </div>
-          
-      </div>       
+          </div>
+           
     ) 
 }
 

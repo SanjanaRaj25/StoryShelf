@@ -35,10 +35,9 @@ const CreateShelf = () => {
         }
         else {
             let newShelf = {
-                id: shelf.length,
                 shelf_name: shelf_name,
                 description: description,
-                num_books: 0,
+                num_pics: shelf.length,
                 genres: 0,
                 bookArray: [],
                 uid : uid,

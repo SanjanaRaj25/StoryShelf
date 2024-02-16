@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import M, { options } from 'materialize-css';
+// import { DatePicker } from "react-materialize";
 import { addBooks, getShelves } from '../../store/reducers/shelfReducer';
 
 
@@ -58,6 +59,14 @@ export const CreateBooks = () => {
             <div className="input-field">
                 <label className="white-text" htmlFor="author">Genre:</label>
                 <textarea name="" id="genre" className="materialize-textarea white-text" onChange={(e)=>setGenre(e.target.value)} value={genre}></textarea>
+            </div>
+
+       
+       <p className="white-text center"> <i>optional fields</i></p>
+
+            <div className="input-field">
+                <label className="white-text" htmlFor="date">Date read:</label>
+                <input type="text" class="datepicker"/>
             </div>
 
             {/* <div className="input-field">

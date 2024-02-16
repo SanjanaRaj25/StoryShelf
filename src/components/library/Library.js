@@ -10,9 +10,7 @@ import { Navigate } from 'react-router-dom';
 
 import { useDispatch } from 'react-redux';  
 import { getShelves } from '../../store/reducers/shelfReducer';
-import { auth } from '../../config/firebaseConfig';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { SwitchComponent } from './ToggleSwitch';
 
 const Library = (state) => {
 

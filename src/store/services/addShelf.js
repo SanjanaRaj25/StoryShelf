@@ -8,7 +8,7 @@ export async function addShelf(shelf) {
       shelf_name: shelf.shelf_name,
       description: shelf.description,
       bookArray: [],
-      num_books: 0,
+      num_pics: shelf.num_pics,
       genreList: [], 
       uid: shelf.uid,  
       owner: shelf.owner 
