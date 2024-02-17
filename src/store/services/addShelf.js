@@ -1,5 +1,6 @@
 import db from '../../config/firebaseConfig';
 import { collection, getDoc, addDoc, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
+const url = `https://openlibrary.org/search.json`;
 
 // add a new shelf document to the db
 export async function addShelf(shelf) {
@@ -11,8 +12,9 @@ export async function addShelf(shelf) {
       num_pics: shelf.num_pics,
       genreList: [], 
       uid: shelf.uid,  
-      owner: shelf.owner 
-  });
+      owner: shelf.owner, 
+  })
+
     return {
         id: s.id,
         ...shelf
@@ -58,7 +60,7 @@ export async function fetchShelves() {
         const shelfRef = doc(db, 'shelves/'.concat(book.i));
         // const shelfRef = doc(db, 'shelves', '1');
        await updateDoc(shelfRef, {
-            bookArray: arrayUnion({title: book.title, author: book.author, genre: book.genre, date: book.date, rating: book.rating, notes: book.notes}),
+            bookArray: arrayUnion({title: book.title, author: book.author, genre: book.genre, id: book.i, date: book.date, rating: book.rating, notes: book.notes, isbn: book.isbn, first_sentence: book.first_sentence, publish_date: book.publish_date, subject: book.subject, coverpath: book.coverpath}),
             num_books: increment(1), 
             genreList: arrayUnion(book.genre)
        });
@@ -83,7 +85,7 @@ export async function fetchShelves() {
             const shelfRef = doc(db, 'shelves/'.concat(book.i));
             // const shelfRef = doc(db, 'shelves', '1');
            await updateDoc(shelfRef, {
-                bookArray: arrayRemove({title: book.title, author: book.author, genre: book.genre, rating: book.rating, notes: book.notes}),
+                bookArray: arrayRemove({title: book.title, author: book.author, genre: book.genre, date: book.date, rating: book.rating, notes: book.notes, isbn: book.isbn, first_sentence: book.first_sentence, publish_date: book.publish_date, subject: book.subject, coverpath: book.coverpath}),
            });
           }
           catch (error) {
@@ -93,6 +95,9 @@ export async function fetchShelves() {
             ...book
         };
       }
+
+
+
   
 
 

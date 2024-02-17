@@ -41,7 +41,7 @@ const CreateShelf = () => {
                 genres: 0,
                 bookArray: [],
                 uid : uid,
-                owner: owner
+                owner: owner,
             }
             dispatch(addShelves(newShelf));
         }

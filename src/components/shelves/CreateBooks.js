@@ -21,20 +21,54 @@ export const CreateBooks = () => {
     const [author, setAuthor] = useState('');
     const [notes, setNotes] = useState('');
     const [rating, setRating] = useState(0);
-    const [genre, setGenre] = useState([]);
+    const [genre, setGenre] = useState('');
     const [date, setDate] = useState(new Date());
 
 
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const formattedDate = date.toISOString().split('T')[0];
 
-        console.log("notes");
-        console.log(notes);
+        // API call
+        const url = `https://openlibrary.org/search.json?`
+        const encodedTitle = encodeURI(title);
+        const encodedAuthor = encodeURI(author);
+        let path = url + `title=${encodedTitle}&`;
+
+        if(encodedAuthor) {
+        path += `author=${encodedAuthor}&`; 
+        }
+
+        path += 'sort=scans';
+
+
+        const result = await fetch(path);
+        const json = await result.json();
+        const b = json.docs[0];
+        const isbn = b.isbn?.[0] || '';
+        const first_sentence = b.first_sentence?.[0] || '';
+        const publish_date = b.publish_date?.[0] || '';
+        const subject = b.subject?.[0] || '';
+
+        let coverpath = 'https://static.vecteezy.com/system/resources/previews/001/845/818/non_2x/cat-books-in-furniture-drawer-decoration-book-day-free-vector.jpg';
+
+        if(b.cover_i) {
+            coverpath = `https://covers.openlibrary.org/b/id/${b.cover_i}-M.jpg`;
+        }
+        else if (isbn) {
+            coverpath = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`; 
+        }
+    
+        // const coverpath =  `https://covers.openlibrary.org/b/id/${b.cover_i}-M.jpg`;
+
+
+
+        const formattedDate = date.toISOString().split('T')[0];
+      
+  
         const i =  (shelf.id).toString();
         let book={
-            title, author, genre, rating, i, date: formattedDate, notes
+            title, author, genre, rating, i, date: formattedDate, notes, 
+            isbn, first_sentence, publish_date, subject, coverpath
         }
 
         dispatch(addBooks(book));
@@ -49,6 +83,8 @@ export const CreateBooks = () => {
         // go back to shelf
         navigate(-1); // go back 1 page 
     }
+
+   
 
     return(
         <div className="container" onSubmit={handleSubmit} id="bookform">

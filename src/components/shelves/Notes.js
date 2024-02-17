@@ -1,51 +1,40 @@
-import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { Books } from './Book';
-import { Link, Navigate } from 'react-router-dom';
-import { selectShelfList } from '../../store/selectors';
-import { auth } from '../../config/firebaseConfig';
-import { getShelves } from '../../store/reducers/shelfReducer';
 
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-// import { selectShelfById } from '../../store/selectors';
-import cat from '../../imgs/sleepingcat.png';
-
-
+import { Container } from 'react-materialize';
+import { useLocation } from 'react-router-dom';
 // pass in book and shelf
 
 const Notes = () => {
+    const location = useLocation();
+  
+    const book = location.state.book;
 
-    const { id } = useParams();
-    const dispatch = useDispatch();
-    const shelves = useSelector(selectShelfList);
-    const shelf = shelves.find(shelf => shelf.id === id);
-    const uid = useSelector(state => state.user.uid); 
-
-    useEffect(() => {
-        dispatch(getShelves());
-        }, [dispatch]);
-
-
-    if(!shelf) {
-        return <div>Loading...</div>; 
-      }
-
-    if(!uid) {
-        return <Navigate to='/signin'></Navigate>
-    }
-
-    const owned = (uid === shelf.uid);
-
-    let books = shelf.bookArray;
+    console.log(book);
 
     return (
-        <div className="container section book-notes blue lighten-5">
-           
-        </div>
+        <>
+            <div className='container center'>
+                
+                <h1>book details</h1>
+                <h3>{book.title}</h3>
+                <h3>{book.author}</h3>
+                <h3>read on: {book.date}</h3>
+                <h3>{book.genre}</h3>
+                <h3>{book.isbn}</h3>
+                <h3>{book.notes}</h3>
+                <h3>published on {book.publish_date}</h3>
+                <h3>rating: {book.rating}</h3>
+                <h3>{book.subject}</h3>
+
+                <img src={book.coverpath} alt="" />
+        
+            </div>
+        </>
 
     )
+
 }
+
+
 
 export default Notes
 
