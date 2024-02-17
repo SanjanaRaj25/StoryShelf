@@ -8,6 +8,7 @@ import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
 import CreateShelf from './components/shelves/CreateShelf';
 import DeleteShelf from './components/shelves/DeleteShelf';
+import Notes from './components/shelves/Notes';
 import { CreateBooks } from './components/shelves/CreateBooks';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistor } from './store/store';
@@ -30,7 +31,7 @@ function App() {
           <Route path='/create' element={<CreateShelf/>}/>
           <Route path='/createBook/:id' element={<CreateBooks/>}/>
           <Route path='/deleteShelf/:id' element={<DeleteShelf/>}/>
-          <Route path='/notes/:id' element={<DeleteShelf/>}/>
+          <Route path='/notes/:id/:title' element={<Notes/>}/>
         </Routes>
       </div>
     </BrowserRouter>

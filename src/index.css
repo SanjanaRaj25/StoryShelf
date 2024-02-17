@@ -52,10 +52,11 @@ span.lever::before{
   height: 100%;
 }
 
-#root > div > div > div > div.card-content.pink.lighten-5 {
-  padding-bottom: 0;
+.card-content.pink.lighten-5{
+  margin-bottom: 40px;
 }
 
+#root > div > div > div > div.card-content.pink.lighten-5
 .btn-floating{
   z-index: 100;
   font-size: 10px;
@@ -96,11 +97,6 @@ span.lever::before{
   padding: 0;
 }
 
-#addBooks{
-  padding-top: 3%;
-  padding-bottom: 10%;
-}
-
 span#book-spine{
   width: 1em;
   writing-mode: vertical-rl;
@@ -126,6 +122,7 @@ span#book-spine{
 
 
 .shelf{
+  padding-top: 10px;
   border-right: 12px solid #80461B;
   border-left: 12px solid #80461B;
   border-bottom: 8px solid #80461B;
@@ -148,6 +145,18 @@ span#book-spine{
   background-color: #fce4ec;
   border-top: 1px solid #fce4ec;
   border-left: 1px solid #fce4ec;
+}
+
+
+.select-wrapper input.select-dropdown {
+  color: white;
+}
+.dropdown-content{
+  background: #e1bee7;
+}
+
+span > label > span{
+  color: black;
 }
 
 #book:nth-child(2n){
@@ -286,11 +295,15 @@ span#book-spine{
 
 /* FORM STYLING */
 
+/* #bookform.container form{
+ background: black;
+} */
+
 form{
   padding: 20px;
   margin-top: 60px;
   background: rgb(255,103,135);
-  background: radial-gradient(circle, rgba(255,103,135,1) 0%, rgba(234,205,221,1) 100%);
+  background: linear-gradient( rgba(255,103,135,1) 50%, rgba(234,205,221,1) 100%);
 }
 
 form label {

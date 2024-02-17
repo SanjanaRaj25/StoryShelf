@@ -49,30 +49,6 @@ export async function fetchShelves() {
       }
   }
 
-    // // add a book to the shelf
-    // export async function addBook(book){
-    //   const shelfRef = doc(db, "shelves", book.shelfId);
-
-    // // Get the document snapshot
-    // const docSnap = await getDoc(shelfRef);
-
-    // // Get existing book array  
-    // const existingBooks = docSnap.data().bookArray;  
-
-    // // Push new book
-    // existingBooks.push({
-    //   title: book.title,
-    //   author: book.author,
-    //   genre: book.genre
-    // });
-
-    // // Write book array back
-    // await updateDoc(shelfRef, {
-    //   bookArray: existingBooks 
-    // });
-    // }
-
-
   // add a book to the shelf
   export async function addBook(book){
     // get the doc with the right ID
@@ -82,7 +58,7 @@ export async function fetchShelves() {
         const shelfRef = doc(db, 'shelves/'.concat(book.i));
         // const shelfRef = doc(db, 'shelves', '1');
        await updateDoc(shelfRef, {
-            bookArray: arrayUnion({title: book.title, author: book.author, genre: book.genre}),
+            bookArray: arrayUnion({title: book.title, author: book.author, genre: book.genre, date: book.date, rating: book.rating, notes: book.notes}),
             num_books: increment(1), 
             genreList: arrayUnion(book.genre)
        });
@@ -107,8 +83,7 @@ export async function fetchShelves() {
             const shelfRef = doc(db, 'shelves/'.concat(book.i));
             // const shelfRef = doc(db, 'shelves', '1');
            await updateDoc(shelfRef, {
-                bookArray: arrayRemove({title: book.title, author: book.author, genre: book.genre}),
-                num_books: increment(-1), 
+                bookArray: arrayRemove({title: book.title, author: book.author, genre: book.genre, rating: book.rating, notes: book.notes}),
            });
           }
           catch (error) {
