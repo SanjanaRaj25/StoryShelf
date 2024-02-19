@@ -29,6 +29,7 @@ const SignIn = () => {
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
+            alert("there was an issue with your login info");
             console.log(errorCode, errorMessage);
             // ..
         });

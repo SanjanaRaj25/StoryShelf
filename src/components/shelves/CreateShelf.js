@@ -34,6 +34,7 @@ const CreateShelf = () => {
             console.log('the library is too big! let us clean out some shelves');
         }
         else {
+            console.log('here');
             let newShelf = {
                 shelf_name: shelf_name,
                 description: description,

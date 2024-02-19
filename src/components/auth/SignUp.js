@@ -14,23 +14,43 @@ const SignUp = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const isValidEmail = (email) => {
+        const Regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return Regex.test(email);
+    }
  
     const onSubmit = async (e) => {
+        e.preventDefault()
 
-    const name = `${firstName} ${lastName}`;
-    console.log(name);
-      e.preventDefault()
-      try {
-        await createUserWithEmailAndPassword(auth, email, password).catch((err)=>console.log(err));
-        await updateProfile(auth.currentUser, { displayName: name}).catch((err)=>console.log(err));
-        navigate("/signin");
-      }
-      catch (err) {
-        console.log(err);
-      }
-     
+        // check for incorrect values
+        if (!firstName || !lastName || !email || !password) {
+            alert('please fill in all fields.');
+            return;
+        }
+
+        if (password.length < 6) {
+            alert('Password must be at least 6 characters long.');
+            return;
+        }
+
+        if (!isValidEmail(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+    
+
+        // move on to firebase
+        const name = `${firstName} ${lastName}`;
+        try {
+            await createUserWithEmailAndPassword(auth, email, password).catch((err)=>console.log(err));
+            await updateProfile(auth.currentUser, { displayName: name}).catch((err)=>console.log(err));
+            navigate("/signin");
+        }
+        catch (err) {
+            console.log(err);
+        }
     }
-
  
   return (
     <div id="auth-background">

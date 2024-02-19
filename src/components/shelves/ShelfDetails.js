@@ -10,6 +10,7 @@ import { getShelves } from '../../store/reducers/shelfReducer';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 // import { selectShelfById } from '../../store/selectors';
 import cat from '../../imgs/sleepingcat.png';
+import { Chip } from 'react-materialize';
 
 
 const ShelfDetails = () => {
@@ -39,12 +40,16 @@ const ShelfDetails = () => {
     }
 
     const owned = (uid === shelf.uid);
-    console.log(owned);
+    console.log(shelf.genreList);
 
 
     let books = shelf.bookArray;
 
     return (
+        <>
+
+        {/* <div style={{position: "fixed", top: "650px", width: "300px", height: "300px", border: "1px solid black"}}></div> */}
+        
         <div className="container section shelf-details">
             <div className="card z-depth-1">
                 <div className="card-content pink lighten-5">
@@ -52,7 +57,9 @@ const ShelfDetails = () => {
                     <h5>{shelf.description}</h5>
                     <hr />
                     <br />
-                    <p>This shelf belongs to <span className='chip'>{ shelf.owner }.</span> It contains <span className='chip'>{books.length} books</span> that range across <span className='chip'>{shelf.genreList.length} genres</span></p>
+                    <p>This shelf belongs to <span className='chip'>{ shelf.owner }.</span> It contains <span className='chip blue lighten-4'>{books.length} books</span></p> <br />
+                    { shelf.genreList.length > 0 && <p>in the genres of {shelf.genreList.map((genre)=> genre.length > 0 && <span className='chip indigo lighten-4'>{ genre }</span>)}</p>}
+                    { shelf.bookArray.length > 0 && <p>click on a volume to learn more! </p> }
                     <br />
                     { owned &&
                     <Link to={`/createBook/${shelf.id}`} className="btn-floating btn-large pink z-depth-1">
@@ -78,6 +85,9 @@ const ShelfDetails = () => {
                 </div>
             </div>
         </div>
+        
+     </>
+
 
     )
 }

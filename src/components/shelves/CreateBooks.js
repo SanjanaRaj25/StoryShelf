@@ -7,6 +7,8 @@ import { DatePicker, Select, DropdownOptions } from "react-materialize";
 import { addBooks, getShelves } from '../../store/reducers/shelfReducer';
 
 
+
+
 export const CreateBooks = () => {
 
     const { id } = useParams();
@@ -40,34 +42,48 @@ export const CreateBooks = () => {
 
         path += 'sort=scans';
 
-
         const result = await fetch(path);
+
+        // if (!result.ok) {
+        //     alert('Book not found on Open Library. Please check your title and author information.');
+        // }
+
         const json = await result.json();
-        const b = json.docs[0];
+
+        // if (json.numFound === 0) {
+        //     alert('Book not found on Open Library. Please check your title and author information.');
+        //     return;
+        // }
+
+        const b = json.docs?.[0] || '' ;
+
         const isbn = b.isbn?.[0] || '';
         const first_sentence = b.first_sentence?.[0] || '';
         const publish_date = b.publish_date?.[0] || '';
         const subject = b.subject?.[0] || '';
+        const fetched_author = b.author?.[0] || author;
 
-        let coverpath = 'https://static.vecteezy.com/system/resources/previews/001/845/818/non_2x/cat-books-in-furniture-drawer-decoration-book-day-free-vector.jpg';
-
+        let coverpath = "";
         if(b.cover_i) {
             coverpath = `https://covers.openlibrary.org/b/id/${b.cover_i}-M.jpg`;
+        }
+        else if (b.olid) {
+            const olid = b.olid.replace(/\D/g,'');
+            coverpath = `https://covers.openlibrary.org/b/olid/${olid}-M.jpg`;
+          
         }
         else if (isbn) {
             coverpath = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`; 
         }
-    
-        // const coverpath =  `https://covers.openlibrary.org/b/id/${b.cover_i}-M.jpg`;
 
+        // add in handling for if api call returns null
 
 
         const formattedDate = date.toISOString().split('T')[0];
       
-  
-        const i =  (shelf.id).toString();
+        const i = id.toString();
         let book={
-            title, author, genre, rating, i, date: formattedDate, notes, 
+            title, author: fetched_author, genre, rating, i, date: formattedDate, notes, 
             isbn, first_sentence, publish_date, subject, coverpath
         }
 
@@ -84,8 +100,6 @@ export const CreateBooks = () => {
         navigate(-1); // go back 1 page 
     }
 
-   
-
     return(
         <div className="container" onSubmit={handleSubmit} id="bookform">
 
@@ -96,17 +110,17 @@ export const CreateBooks = () => {
                 <input className="white-text required" type="text" id="title" onChange={(e)=>setTitle(e.target.value)} value={title}/>
             </div>
 
+            <p className="white-text center"> <i>optional information</i></p>
+
             <div className="input-field">
                 <label className="white-text " htmlFor="author">Author:</label>
                 <textarea name="" id="author" className="materialize-textarea white-text required" onChange={(e)=>setAuthor(e.target.value)} value={author}></textarea>
             </div>
 
-            <p className="white-text center"> <i>extra information</i></p>
 
         <label className="white-text" htmlFor="genre">Genre:</label>
         <div className="input-field">
           <Select 
-            multiple = {true}
             className="black-text"
             id="genre"
             value={genre}
@@ -118,41 +132,34 @@ export const CreateBooks = () => {
             }}
           >
                 <option value = "" disabled>Select Most Applicable Genre</option>
-                  <option value = "Classic">Classic</option>
-                  <option value = "Comic">Comic</option>
-                  <option value = "Mystery">Mystery</option>
-                  <option value = "Fantasy">Fantasy</option>
-                  <option value = "Historical Fiction">Historical Fiction</option>
-                  <option value = "Nonfiction">Nonfiction</option>
-                  <option value = "Horror">Horror</option>
-                  <option value = "Literary Fiction">Literary Fiction</option>
-                  <option value = "Romance">Romance</option>
-                  <option value = "Science Fiction">Science Fiction</option>
-                  <option value = "Short Stories">Short Stories</option>
-                  <option value = "Biographies">Biographies</option>
+                  <option id="op" value = "Classic">Classic</option>
+                  <option id="op" value = "Comic">Comic</option>
+                  <option id="op" value = "Mystery">Mystery</option>
+                  <option id="op" value = "Fantasy">Fantasy</option>
+                  <option id="op" value = "Historical Fiction">Historical Fiction</option>
+                  <option id="op" value = "Nonfiction">Nonfiction</option>
+                  <option id="op" value = "Horror">Horror</option>
+                  <option id="op" value = "Literary Fiction">Literary Fiction</option>
+                  <option id="op" value = "Romance">Romance</option>
+                  <option id="op" value = "Science Fiction">Science Fiction</option>
+                  <option id="op" value = "Short Stories">Short Stories</option>
+                  <option id="op" value = "Biographies">Biographies</option>
           </Select>
         </div>
-
-            {/* <div className="input-field">
-                <label className="white-text" htmlFor="author">Genre:</label>
-                <textarea name="" id="genre" className="materialize-textarea white-text" onChange={(e)=>setGenre(e.target.value)} value={genre}></textarea>
-            </div> */}
-
        
-      
-
         
        <label className="white-text">Date read:</label>
 
        <React.Fragment>
-        <DatePicker
-            className="white-text"
-            options={{
-            format: 'yyyy-mm-dd', // Adjust the format as needed
-            container: 'body', // You can change the container to 'inline' or other values
-            theme: 'teal',
-            labelStyle: { color: 'white' },
-            }}
+        <DatePicker className = "white-text"
+           
+           options={{
+            autoClose: true,
+            container: 'body',
+            selectMonths: true,
+            showClearBtn: true,
+            theme: 'dark' 
+          }}
             value={date.toISOString().split('T')[0]} // Format the date to 'yyyy-mm-dd'
             id="myDate"
             onChange={(newDate) => setDate(newDate)}
@@ -161,17 +168,13 @@ export const CreateBooks = () => {
 
         <div class="input-field">
           <input id="icon_star" type="number" name="points" min="0" max="10" class="validate white-text"/>
-          <label for="icon_star" class="white-text" onChange={(e)=>setRating(e.target.value)} value={rating}>Rating: 0.0-10.0</label>
+          <label for="icon_star" class="white-text" onChange={(e)=>setRating(e.target.value)} value={rating}>Rating: 0-10</label>
         </div>
-
-
 
         <div className="input-field">
                 <label className="white-text " htmlFor="notes">Notes:</label>
                 <textarea name="" id="author" className="materialize-textarea white-text required" onChange={(e)=>setNotes(e.target.value)} value={notes}></textarea>
             </div>
-
-       
 
             <div className="input-field">
                 <button type='Submit' className="btn transparent z-depth-1">Submit</button>

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { useSelector } from 'react-redux';
-import prof from '../../imgs/plainacc.png';
 import img1 from '../../imgs/shelf1.jpg';
 import img2 from '../../imgs/shelf2.jpeg';
 import img3 from '../../imgs/shelf3.jpg';

@@ -86,11 +86,36 @@ span.lever::before{
   font-size: 10px;
 }
 
+/* BOOK DETAIL PAGE STYLING */
+
+#notebook{
+  z-index: 1;
+  margin-top: 50px;
+  background-color:  rgb(255, 214, 221);
+  border: 1px solid rgb(255, 211, 241);
+  min-height: 1200px;
+  opacity: 0.9;
+}
+
+#notebook .row {
+  background-color: white;
+  background-image: url(https://img.freepik.com/free-vector/blank-white-notepaper-design-vector_53876-161342.jpg?size=626&ext=jpg&ga=GA1.2.448629909.1706991583&semt=ais);
+  opacity: 0.7;
+  z-index: 2;
+  min-height: 1000px;
+  margin-left: 40px;
+  margin-right: 40px;
+  /* background-image: url(https://github.com/SanjanaRaj25/StoryShelf/blob/caba7151b75a90eb4f052207f6afdf431794dbb2/src/imgs/white-texture.jpg); */
+}
+
+
+
+
 /* SHELF DETAIL PAGE STYLING */
 
 #book-cat{
   position: absolute;
-  transform: translateY(-200px);
+  transform: translateY(-190px);
   right: 10%;
   width: 30%;
   margin: 0;
@@ -98,7 +123,7 @@ span.lever::before{
 }
 
 span#book-spine{
-  width: 1em;
+  width: .5em;
   writing-mode: vertical-rl;
   text-orientation: sideways;
   color:#263238;
@@ -107,6 +132,7 @@ span#book-spine{
 #librarycards{
   margin-top: 10px;
 }
+
 
 #bookcards.row{
   padding-right: 1%;
@@ -152,7 +178,7 @@ span#book-spine{
   color: white;
 }
 .dropdown-content{
-  background: #e1bee7;
+  background: #faeef8;
 }
 
 span > label > span{
@@ -231,10 +257,15 @@ span > label > span{
   background-color: #eeeeee; 
 }
 
+/* create book form */
 
+div.select-wrapper.select-month > input, div.select-wrapper.select-year > input{
+  color:  black;
+}
 
-
-
+div.datepicker-date-display{
+  background: radial-gradient(rgba(255,103,135,1) 45%, rgba(234,205,221,1) 100%);
+}
 
 
 /* NAV BAR STYLING */
@@ -294,10 +325,10 @@ span > label > span{
 /* SIGN IN/UP */
 
 /* FORM STYLING */
-
 /* #bookform.container form{
  background: black;
 } */
+
 
 form{
   padding: 20px;

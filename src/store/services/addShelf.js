@@ -2,6 +2,7 @@ import db from '../../config/firebaseConfig';
 import { collection, getDoc, addDoc, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
 const url = `https://openlibrary.org/search.json`;
 
+
 // add a new shelf document to the db
 export async function addShelf(shelf) {
   const collRef = collection(db, "shelves");
@@ -25,6 +26,7 @@ export async function addShelf(shelf) {
 
 // get a list of all the shelf documents in the db to update the state
 export async function fetchShelves() {
+   console.log("here");
 
     // query firestore
     const snapshot = await getDocs(collection(db, 'shelves'));
