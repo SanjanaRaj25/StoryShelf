@@ -7,13 +7,10 @@ import img3 from '../../imgs/shelf3.jpg';
 import img4 from '../../imgs/shelf4.jpg';
 import img5 from '../../imgs/shelf8.jpg';
 import img6 from '../../imgs/shelf6.jpg';
-import { auth } from '../../config/firebaseConfig';
 const images = [img1, img2, img3, img4, img5, img6];
 
 
 const ShelfSummary = ({shelf}) => {
-
-    let filter = false;
 
     const uid = useSelector(state => state.user.uid); 
 
@@ -44,11 +41,10 @@ const ShelfSummary = ({shelf}) => {
               <div id="card-info">
                 <p className="black-text">{shelf.description}</p>
                 <br />
-                {/* <p className="grey-text"> contains {shelf.bookArray.length} books and {shelf.genreList.length} genres</p> */}
 
               <span>
               <div className="chip deep-purple lighten-4">
-                  <span><i className="close material-icons">book</i> {shelf.num_books} books</span>
+                  <span><i className="close material-icons">book</i> {shelf.bookArray.length} books</span>
                 </div>
 
                 <div className="chip indigo lighten-4">

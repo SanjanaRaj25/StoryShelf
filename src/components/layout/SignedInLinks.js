@@ -28,7 +28,7 @@ const SignedInLinks = () => {
     return (
         <ul className="right">
             <li><NavLink to='/Library' className="waves-effect waves-light btn pink accent-1">Library</NavLink></li>
-            <li><a onClick={handleLogout} className="Btn waves-effect waves-light btn indigo accent-1">Logout</a></li>
+            <li><button onClick={handleLogout} className="Btn waves-effect waves-light btn indigo accent-1">Logout</button></li>
         </ul>
     )
 }

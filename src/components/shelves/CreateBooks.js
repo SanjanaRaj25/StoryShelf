@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'; 
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { DatePicker, Select, DropdownOptions } from "react-materialize";
-import { addBooks, getShelves } from '../../store/reducers/shelfReducer';
+import { DatePicker, Select } from "react-materialize";
+import { addBooks } from '../../store/reducers/shelfReducer';
 
 
 
@@ -12,8 +11,6 @@ import { addBooks, getShelves } from '../../store/reducers/shelfReducer';
 export const CreateBooks = () => {
 
     const { id } = useParams();
-    const shelves = useSelector(state => state.shelves.shelfArray);
-    const shelf = shelves.find(shelf => shelf.id === id);
     
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -44,16 +41,7 @@ export const CreateBooks = () => {
 
         const result = await fetch(path);
 
-        // if (!result.ok) {
-        //     alert('Book not found on Open Library. Please check your title and author information.');
-        // }
-
         const json = await result.json();
-
-        // if (json.numFound === 0) {
-        //     alert('Book not found on Open Library. Please check your title and author information.');
-        //     return;
-        // }
 
         const b = json.docs?.[0] || '' ;
 

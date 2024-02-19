@@ -4,19 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Books } from './Book';
 import { Link, Navigate } from 'react-router-dom';
 import { selectShelfList } from '../../store/selectors';
-import { auth } from '../../config/firebaseConfig';
 import { getShelves } from '../../store/reducers/shelfReducer';
-
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-// import { selectShelfById } from '../../store/selectors';
 import cat from '../../imgs/sleepingcat.png';
-import { Chip } from 'react-materialize';
 
 
 const ShelfDetails = () => {
-
-   
-    
     const { id } = useParams();
     const dispatch = useDispatch();
     const shelves = useSelector(selectShelfList);
@@ -40,15 +32,12 @@ const ShelfDetails = () => {
     }
 
     const owned = (uid === shelf.uid);
-    console.log(shelf.genreList);
 
 
     let books = shelf.bookArray;
 
     return (
         <>
-
-        {/* <div style={{position: "fixed", top: "650px", width: "300px", height: "300px", border: "1px solid black"}}></div> */}
         
         <div className="container section shelf-details">
             <div className="card z-depth-1">
@@ -58,7 +47,7 @@ const ShelfDetails = () => {
                     <hr />
                     <br />
                     <p>This shelf belongs to <span className='chip'>{ shelf.owner }.</span> It contains <span className='chip blue lighten-4'>{books.length} books</span></p> <br />
-                    { shelf.genreList.length > 0 && <p>in the genres of {shelf.genreList.map((genre)=> genre.length > 0 && <span className='chip indigo lighten-4'>{ genre }</span>)}</p>}
+                    { shelf.genreList.length > 1 && <p>in the genres of {shelf.genreList.map((genre)=> genre.length > 0 && <span className='chip indigo lighten-4'>{ genre }</span>)}</p>}
                     { shelf.bookArray.length > 0 && <p>click on a volume to learn more! </p> }
                     <br />
                     { owned &&

@@ -1,9 +1,7 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword, updateProfile, getAdditionalUserInfo  } from 'firebase/auth';
+import {  createUserWithEmailAndPassword, updateProfile  } from 'firebase/auth';
 import { auth } from '../../config/firebaseConfig';
-import { db } from '../../config/firebaseConfig';
-import { collection, getDocs, setDoc, deleteDoc, doc, updateDoc, arrayUnion, arrayRemove, increment } from "firebase/firestore"; 
 
 
 

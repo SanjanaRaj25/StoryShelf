@@ -145,10 +145,8 @@ const Notes = () => {
 
             { book.coverpath.length>0 ? (
                 <>
-                    <span class="card-title">Book Cover:</span>
-                    <hr />
-                    <br />
-                    <img src={book.coverpath} alt="" style={{width:"150px", height:"150px"}}/>
+                  
+                    <img src={book.coverpath} alt="" style={{maxWidth:"200px", maxHeight:"250px"}}/>
                             
                 </>
                 ):(

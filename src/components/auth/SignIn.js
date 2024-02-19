@@ -1,6 +1,6 @@
-import React, { Component, useState } from 'react'
+import React, { useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom';
-import {  createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {  signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../config/firebaseConfig';
 import { useDispatch } from 'react-redux';
 import { login } from '../../store/reducers/user';
@@ -33,8 +33,6 @@ const SignIn = () => {
             console.log(errorCode, errorMessage);
             // ..
         });
-
-    console.log('here');
  
     }
  
