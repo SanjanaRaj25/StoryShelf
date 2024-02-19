@@ -18,8 +18,8 @@ I think the hardest part of the project was coming up with a good architecture f
 
 <h3> components </h3>
 <ul> 
-  <li>**authentication**: SignIn.js, SignUp.js</li>
-  <li>**layout**: Landing.js, Navbar.js SignedInLinks.js, SignedOutLinks.js</li>
+  <li>authentication: SignIn.js, SignUp.js</li>
+  <li>layout: Landing.js, Navbar.js SignedInLinks.js, SignedOutLinks.js</li>
   <li>library page: Library.js, ShelfList.js, ShelfSummary.js, ShelfDetails.js, CreateShelf.js, DeleteShelf.js</li>
   <li>shelf page: ShelfDetails.js, CreateBooks.js, Books.js, Notes.js</li>
 </ul>
