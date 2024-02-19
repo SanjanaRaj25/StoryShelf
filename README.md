@@ -28,4 +28,9 @@ I think the hardest part of the project was coming up with a good architecture f
 <h3> where next? </h3>
 If I were to continue working on this project, I would want to find a better way of fetching more information about each book, allow users to edit shelves and delete books, and edit their notes. I would try to offer more social options, such as comments and smaller library groups for friends. It would be interesting to use something like RAG to offer people personalized book reocmmendations based on the books in their shelves. 
 
-<img width="473" alt="Screenshot 2024-02-18 at 9 41 57 PM" src="https://github.com/SanjanaRaj25/StoryShelf/assets/98998584/7eba361e-8daa-4602-ab73-e8974bd50668">
+<br/>
+
+<img width="473" alt="Screenshot 2024-02-18 at 9 41 57 PM" src="https://github.com/SanjanaRaj25/StoryShelf/assets/98998584/7eba361e-8daa-4602-ab73-e8974bd50668"><img width="836" alt="Screenshot 2024-02-18 at 10 50 31 PM" src="https://github.com/SanjanaRaj25/StoryShelf/assets/98998584/738154ec-dfe4-44ce-947d-f6576dfcd736"><img width="829" alt="Screenshot 2024-02-18 at 10 50 47 PM" src="https://github.com/SanjanaRaj25/StoryShelf/assets/98998584/33436838-3ad6-4db9-8fa4-7709142b2bca"><img width="501" alt="Screenshot 2024-02-18 at 10 51 41 PM" src="https://github.com/SanjanaRaj25/StoryShelf/assets/98998584/43cd3e9a-38cd-49b5-9734-024eafc14558">
+
+
+
