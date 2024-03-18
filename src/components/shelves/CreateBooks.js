@@ -6,6 +6,8 @@ import { DatePicker, Select } from "react-materialize";
 import { addBooks } from '../../store/reducers/shelfReducer';
 
 
+const apikey = '32fa00df851e4bca9cb93d50b8bbccc8';
+const gKey = 'AIzaSyCROGdS_NPLzQ5FOZJX0yzd0TAIKkt9yqU'
 
 
 export const CreateBooks = () => {
@@ -23,57 +25,95 @@ export const CreateBooks = () => {
     const [genre, setGenre] = useState('');
     const [date, setDate] = useState(new Date());
 
+    // convert isbn10 to isbn13
+    // function convertISBN10to13(isbn10) {
+    //     if (!isbn10 || typeof isbn10 !== 'string') {
+    //       return ''; 
+    //     }
+      
+    //     // Remove any hyphens
+    //     isbn10 = isbn10.replace(/-/g, '');
+        
+    //     // Check if ISBN-10 is valid
+    //     let sum = 0;
+    //     for (let i = 0; i < 9; i++) {
+    //       sum += (10 - i) * parseInt(isbn10.charAt(i));
+    //     }
+    //     if (sum % 11 !== 0) {
+    //       return '';
+    //     }
+      
+    //     // Calculate the ISBN-13 check digit
+    //     let isbn13 = '978' + isbn10;
+    //     let check = 0;
+    //     for (let i = 0; i < 12; i+=2) {
+    //       check += parseInt(isbn13.charAt(i));
+    //     }
+    //     for (let i = 1; i < 12; i+=2) {  
+    //       check += 3 * parseInt(isbn13.charAt(i));
+    //     }
+    //     check = (10 - (check % 10)) % 10;  
+      
+    //     isbn13 += check;
+    //     return isbn13;  
+    //   }
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // API call
-        const url = `https://openlibrary.org/search.json?`
-        const encodedTitle = encodeURI(title);
-        const encodedAuthor = encodeURI(author);
-        let path = url + `title=${encodedTitle}&`;
+        const url = `https://www.googleapis.com/books/v1/volumes?key=${gKey}&q=`;
+        
+         //API call to google books
+         const encodedTitle = encodeURI(title);
+         const encodedAuthor = encodeURI(author);
+         let path = url + `intitle:${encodedTitle}`;
 
-        if(encodedAuthor) {
-        path += `author=${encodedAuthor}&`; 
-        }
+         if(encodedAuthor) {
+          path += `+inauthor:${encodedAuthor}&`; 
+          }
 
-        path += 'sort=scans';
+         const res = await fetch(path);
+         const r = await res.json();
+         const b = r.items[0];
 
-        const result = await fetch(path);
+        // fetched author
+        const fetched_author = b.volumeInfo.authors[0] || '';
 
-        const json = await result.json();
+        //text snippet
+        const snippet = b.searchInfo.textSnippet || '';
 
-        const b = json.docs?.[0] || '' ;
+        //subject
+        const subject = b.volumeInfo.categories || [];
 
-        const isbn = b.isbn?.[0] || '';
-        const first_sentence = b.first_sentence?.[0] || '';
-        const publish_date = b.publish_date?.[0] || '';
-        const subject = b.subject?.[0] || '';
-        const fetched_author = b.author?.[0] || author;
+        //isbn
+        const isbn = b.volumeInfo.industryIdentifiers[0].identifier || '';
 
-        let coverpath = "";
-        if(b.cover_i) {
-            coverpath = `https://covers.openlibrary.org/b/id/${b.cover_i}-M.jpg`;
-        }
-        else if (b.olid) {
-            const olid = b.olid.replace(/\D/g,'');
-            coverpath = `https://covers.openlibrary.org/b/olid/${olid}-M.jpg`;
-          
-        }
-        else if (isbn) {
-            coverpath = `https://covers.openlibrary.org/b/isbn/${isbn}-M.jpg`; 
-        }
+         //sentence
+         const bbdesc = b.volumeInfo.description || '';
+         
+         // rating
+         const bbrating = b.volumeInfo.averageRating || 0;
 
-        // add in handling for if api call returns null
+         //publish date
+         const publish_date = b.volumeInfo.publishedDate || '';
+
+         //coverpath
+         const coverpath = b.volumeInfo.imageLinks.thumbnail || b.volumeInfo.imageLinks.smallThumbnail || b.volumeInfo.imageLinks.small || b.volumeInfo.imageLinks.medium || b.volumeInfo.imageLinks.large || '';
+
+         // numpages
+         const numpages = b.volumeInfo.pageCount || 0;
 
 
+        // compile data into book object and add to shelf
         const formattedDate = date.toISOString().split('T')[0];
-      
         const i = id.toString();
         let book={
             title, author: fetched_author, genre, rating, i, date: formattedDate, notes, 
-            isbn, first_sentence, publish_date, subject, coverpath
+            isbn, first_sentence:snippet, publish_date, subject, coverpath, bbid:0, bbdesc, numpages, bbrating, similar_books:[]
         }
+
+        console.log(book);
 
         dispatch(addBooks(book));
 

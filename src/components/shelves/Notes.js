@@ -30,174 +30,85 @@ const Notes = () => {
                 <h3 className='grey-text'> {book.author}</h3>
 
                 <div className='container'>
+             
                 <div className='row z-depth-2'>
+                    <div className='col s5 m5 center' id="left-page">
+                        <div className='card small pink lighten-4 z-depth-6 '> <br />
 
-{/* data */}
-        <div className='col s5 m6 left' id="left-page">
+                         
+                            { book.bbrating>0 && <><h7 className=""><em>the average rating of this book is:</em></h7>
+                            <h5>{book.bbrating} / 5</h5></>}
 
-            <div className='card small amber lighten-4'>
-                <div class="card-content black-text">
-                    { book.date.length>0 ? (
-                        <>
-                            <span class="card-title">Read On</span>
-                            <hr />
+                            { book.rating.length>0 &&
+                                <>
+                                     <h7 className=""><em>you rated this book:</em></h7>
+                                    <h5>{book.rating} / 5</h5>
+                                </>
+                            }   
+
+                        </div>
+                        <div className='card small purple lighten-4 z-depth-6'>
+                                { book.notes.length>0 ? (
+                                <>
+                                    <span class="card-title">Notes:</span>
+                                    <hr />
+                                    <br />
+                                    <h6>{book.notes}</h6>
+                                </>
+                            ):(
+                                <>
+                                    <br /><br />
+                                    <img src={doodle2} alt="" style={{width:"150px", height:"150px"}}/>           
+                                </>
+                            )}
+                        </div>
+                        <div className='card small blue lighten-4 z-depth-6'>
                             <br />
-                            <h3>{book.date}</h3>
-                        </>
-                    ):(
-                        <>
-                            <img src={doodle1} style={{width:"150px", height:"150px"}} alt="" />
-                        </>
-                    )}
-                </div>
-            </div>
-
-            <div className='card small pink lighten-4'>
-            <div class="card-content black-text">
-            { book.notes.length>0 ? (
-                        <>
-                            <span class="card-title">Notes:</span>
-                            <hr />
-                            <br />
-                            <h6>{book.notes}</h6>
-                        </>
-                    ):(
-                        <>
-                            <br /><br />
-                            <img src={doodle2} alt="" style={{width:"150px", height:"150px"}}/>           
-                        </>
-                    )}
-                </div>
-            </div>
-
-            <div className='card small amber lighten-4'>
-            <div class="card-content black-text">
-
-                { book.genre.length > 0 || book.subject.length > 0 || book.first_sentence.length > 0 ? (
-                    <>
-                        <span class="card-title">More Info:</span>
-                        <hr />
-                        <br />
-                    </>
-                ): (<><br /></>)}
-
-                { book.genre.length>0 ? (
-                            <>
-                                <h6>genre: {book.genre}</h6>
-                            </>
-                        ):(
-                            <><img src={curve} alt="" style={{width:"175px", height: "15px", margin: "10px"}}/></>
-                    )}
-
-
-                { book.subject.length>0 ? (
-                        <>
-                          
-                            <h6>key subjects: {book.subject}</h6>
-                        </>
-                    ):(
-                        <><img src={curve} alt="" style={{width:"175px", height: "15px", margin: "10px"}}/></>
-                )}
-
-                { book.first_sentence.length>0 ? (
-                        <>
-                            <div style={{height: "5px"}}>
-                                <br />
-                                <span><p>first sentence:</p><p style={{fontSize: "10px"}}>"{book.first_sentence}"</p> </span>
-                                <br />
+                            <div className='container'>
+                                <h6 className="left">* read on {book.date}</h6><br />
+                                { book.numpages>0 && <h6 className="left"> {book.numpages} pages</h6>}<br /><br />
+                                <h6 className="left">* {book.subject}</h6><br />
                             </div>
-                           
-                        </>
-                    ):(
-                        <><img src={curve} alt="" style={{width:"175px", height: "15px", margin: "10px"}}/></>
-                )}
-
-                
-                </div>
-            </div>
-
-        </div>
-        {/* annotations/notes */}
-        <div className='col s5 m6 right' id="right-page">
-
-        <div className='card small pink lighten-4'>
-            <div class="card-content black-text">
-
-            { book.rating.length>0 ? (
-                        <>
-                            <span class="card-title">Rating</span>
-                            <hr />
-                            <br />
-                            <h3>{book.rating}</h3> 
-                        </>
-                    ):(
-                        <>
-                            <br />
-                            <img src={doodle3} alt="" style={{width:"150px", height:"150px"}}/>
-                        </>
-            )}          
-                </div>
-        </div>
-
-        {/* book cover (if found) */}
-        <div className='card small amber lighten-4'>
-            <div class="card-content black-text">
-
-            { book.coverpath.length>0 ? (
-                <>
-                  
-                    <img src={book.coverpath} alt="" style={{maxWidth:"200px", maxHeight:"250px"}}/>
                             
-                </>
-                ):(
-                <>
-                    <img src={doodle4} alt="" style={{width:"150px", height:"200px"}}/>
-                </>
-            )}        
-            </div>
-        </div>
 
-        {/* less interesting details (isbn, publishing) */}
-        <div className='card small pink lighten-4'>
-            <div class="card-content black-text">
 
-            { book.publish_date.length > 0 || book.isbn.length > 0 ? (
-                    <>
-                        <span class="card-title">Book Details:</span>
-                        <hr />
+                        </div>
+                    </div>
+
+                    <div className='col s5 m7 right' id="right-page">
+                    <div className='card small transparent lighten-4 z-depth-0 '>
                         <br />
-                    </>
-                ): (<><img src={doodle5} alt="" /></>)}
 
-                { book.publish_date>0 ? (
+                        { book.bbdesc ? ( <><h5><em>about this text</em></h5><h6>{book.bbdesc}</h6></>):(<><img src={doodle1} alt="" style={{width:"200px", height:"200px"}}/></>)}
+
+                    </div>
+                        <div className='card small transparent lighten-4 z-depth-0 '>
+                            { book.coverpath.length>0 ? (
                             <>
-                                <h5>published on: {book.publish_date}</h5>
+                                <img className='z-depth-3' src={book.coverpath} alt="" style={{maxWidth:"200px", maxHeight:"250px"}}/>         
                             </>
-                        ):(
-                            
-                            <></>
-                    )}
+                            ):(
+                            <>
+                                <img src={doodle4} alt="" style={{width:"150px", height:"200px"}}/>
+                            </>
+                            )}  
+                        </div>
+                        <div className='card small transparent lighten-4 z-depth-0 '>
+                            {book.isbn.length>0 && <h5>isbn #: {book.isbn}</h5>}
+                            {book.genre.length>0 && <h5>{book.genre}</h5>}
+                            {book.numpages>0 && <h5>{book.numpages} pages</h5>}
+                            {book.publish_date && <h5>published on {book.publish_date}</h5>}
 
-                { book.isbn>0 ? (
-                        <>
-                            <h5>ISBN: {book.isbn}</h5>
-                        </>
-                    ):(
-                        <></>
-                )}
-
-                </div>
-        </div>
-
-
-                </div>
+                        </div>
                     </div>
                 </div>
-                
-        
+                </div>
             </div>
-        </>
 
+           
+        </>
+      
+       
     )
 
 }
